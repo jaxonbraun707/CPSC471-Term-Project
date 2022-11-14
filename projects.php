@@ -1,0 +1,12 @@
+<?php
+include('templates/top.php');
+?>
+<?php
+include('templates/top-bar.php');
+?>
+<?php
+include('templates/side-bar.php');
+?>
+<?php
+include('templates/bottom.php');
+?>
