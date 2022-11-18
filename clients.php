@@ -11,7 +11,7 @@ include('templates/top-bar.php');
 	<div class="pt-16 ml-64">
 		<main class="m-4 border rounded">
 			<!-- ideally, can put stuff here -->
-			<h1 class="text-xl font-semibold p-4">Projects</h1>
+			<h1 class="text-xl font-semibold p-4">Clients</h1>
 		</main>
 	</div>
 </div>
