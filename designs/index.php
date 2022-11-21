@@ -1,10 +1,17 @@
 <?php
 $title = 'Designs';
+$designs = [];
+$error = NULL;
 
 $dbname = 'worc';
-$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
+try {
+	$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
+} catch(Exception $e) {
+	echo 'Could not connect to the database.';
+	die();
+}
 
-function designs_index($db, $search_term) {
+function designs_index($db, $search_term) {	
 	$q = "
 		SELECT  
 		  Design.*,
@@ -49,9 +56,13 @@ function designs_index($db, $search_term) {
 }
 
 $search_term = $_GET['search_term'] ?? '';
-$designs = designs_index($db, $search_term);
-
-$designs = $designs->fetchAll(PDO::FETCH_ASSOC);
+try {
+	$designs = designs_index($db, $search_term);
+	$designs = $designs->fetchAll(PDO::FETCH_ASSOC);
+} catch(Exception $e) {
+	$designs = [];
+	$error = 'Failed to execute search query or fetch data.';
+}
 
 include('../templates/top.php');
 ?>
@@ -66,6 +77,17 @@ include('../templates/top-bar.php');
 		<main class="m-4 border rounded">
 			<!-- ideally, can put stuff here -->
 			<div class="grid grid-cols-2 m-4">
+				<?php
+					if (!empty($error)) {
+				?>
+					<section class="col-span-2 bg-red-100 border border-red-500 rounded text-red-500 p-4 mb-4">
+						<p>
+							Error: <?=$error?>
+						</p>
+					</section>
+				<?php
+					}
+				?>
 				<h1 class="text-xl font-semibold">Designs</h1>
 				<div class="text-right">
 					<a href="/designs/create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
