@@ -4,7 +4,53 @@ $title = 'Designs';
 $dbname = 'worc';
 $db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
 
-$designs = $db->query('SELECT * FROM Design');
+function designs_index($db, $search_term) {
+	$q = "
+		SELECT  
+		  Design.*,
+		  Employee.First_Name,
+		  Employee.Last_Name,
+		  User.username
+		FROM Design, Engineering_Designs, Employee, User
+		WHERE
+		  Design.Design_No = Engineering_Designs.Design_No AND
+		  Engineering_Designs.Eng_SSN = Employee.SSN AND
+		  Employee.SSN = User.ESSN
+		";
+
+	if (empty($search_term)) {
+		return $db->query($q);
+	}
+
+	// do the following query if we have a non-empty search term:
+	$q = "
+		SELECT  
+		  Design.*,
+		  Employee.First_Name,
+		  Employee.Last_Name,
+		  User.username
+		FROM Design, Engineering_Designs, Employee, User
+		WHERE
+		  Design.Design_No = Engineering_Designs.Design_No AND
+		  Engineering_Designs.Eng_SSN = Employee.SSN AND
+		  Employee.SSN = User.ESSN AND
+		  (
+		    Design.Design_No LIKE :search_term OR
+		    Employee.First_Name LIKE :search_term OR
+		    Employee.Last_Name LIKE :search_term OR
+		    User.username LIKE :search_term
+		  )
+	";
+
+	$query = $db->prepare($q);
+	$query->execute([':search_term' => $search_term]);
+
+	return $query;
+}
+
+$search_term = $_GET['search_term'] ?? '';
+$designs = designs_index($db, $search_term);
+
 $designs = $designs->fetchAll(PDO::FETCH_ASSOC);
 
 include('../templates/top.php');
@@ -25,8 +71,8 @@ include('../templates/top-bar.php');
 					<a href="/designs/create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
 				</div>
 			</div>
-			<form class="m-4">
-				<input class="border px-2 rounded" type="search" placeholder="Enter Design No.">
+			<form class="m-4" method="GET" action="/designs/index.php">
+				<input class="border px-2 rounded" type="search" placeholder="Enter Design No. or Author" name="search_term" value="<?=$search_term?>">
 				<button class="hover:text-blue-400 hover:border-blue-400 border px-2 text-black rounded font-semibold" type="submit">Search for Design</button>
 			</form>
 
