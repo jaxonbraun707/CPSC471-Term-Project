@@ -5,7 +5,7 @@
 		</li>
 		<li class="py-2 px-4">Projects</li>
 		<li class="py-2 px-4">
-			<a href="/designs">Designs</a>
+			<a href="/designs" class="hover:text-blue-500">Designs</a>
 		</li>
 	</ul>
 </nav>
