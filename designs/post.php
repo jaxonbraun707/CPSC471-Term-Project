@@ -1,22 +1,24 @@
 <?php
-$dbname = 'worc';
-$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
+require_once('../init.php');
+require_once('../db.php');
+require_once('../data/design.php');
 
-function add_design($db, $design_no, $budget) {
-	$q = "
-		INSERT INTO Design
-		VALUES (:design_no, :budget)
-	";
-	$query = $db->prepare($q);
-	$query->execute([':design_no' => $design_no, ':budget' => $budget]);
+$design_no = $_POST['design_no'] ?? '';
+$budget = $_POST['budget'] ?? '';
+$authors = $_POST['authors'] ?? [];
+
+// redirect back to create form if either value is empty.
+if(empty($design_no) || empty($budget) || empty($authors)) {
+	$error = 'Design and budget are required.';
+	$_SESSION['error'] = $error;
+	header("Location: /designs/create.php", TRUE, 200);
+	die();
 }
 
-add_design($db, $_POST['design_no'], $_POST['budget']);
-
-// TODO: handle errors
+add_design($db, $design_no, $budget, $authors);
 
 // successfully redirect back to designs listing
-// return status code 201 as a sign that the post request was successful
-header("Location: /designs", TRUE, 201);
+// return status code 200 as a sign that the post request was successful
+header("Location: /designs/index.php", TRUE, 200);
 die();
 ?>

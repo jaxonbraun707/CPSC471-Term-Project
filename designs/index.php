@@ -1,63 +1,16 @@
 <?php
+require_once('../init.php');
+require_once('../db.php');
+require_once('../data/design.php');
+
 $title = 'Designs';
 $designs = [];
 $error = NULL;
 
-$dbname = 'worc';
-try {
-	$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
-} catch(Exception $e) {
-	echo 'Could not connect to the database.';
-	die();
-}
-
-function designs_index($db, $search_term) {	
-	$q = "
-		SELECT  
-		  Design.*,
-		  Employee.First_Name,
-		  Employee.Last_Name,
-		  User.username
-		FROM Design, Engineering_Designs, Employee, User
-		WHERE
-		  Design.Design_No = Engineering_Designs.Design_No AND
-		  Engineering_Designs.Eng_SSN = Employee.SSN AND
-		  Employee.SSN = User.ESSN
-		";
-
-	if (empty($search_term)) {
-		return $db->query($q);
-	}
-
-	// do the following query if we have a non-empty search term:
-	$q = "
-		SELECT  
-		  Design.*,
-		  Employee.First_Name,
-		  Employee.Last_Name,
-		  User.username
-		FROM Design, Engineering_Designs, Employee, User
-		WHERE
-		  Design.Design_No = Engineering_Designs.Design_No AND
-		  Engineering_Designs.Eng_SSN = Employee.SSN AND
-		  Employee.SSN = User.ESSN AND
-		  (
-		    Design.Design_No LIKE :search_term OR
-		    Employee.First_Name LIKE :search_term OR
-		    Employee.Last_Name LIKE :search_term OR
-		    User.username LIKE :search_term
-		  )
-	";
-
-	$query = $db->prepare($q);
-	$query->execute([':search_term' => $search_term]);
-
-	return $query;
-}
-
+// retrieve the designs via search.
 $search_term = $_GET['search_term'] ?? '';
 try {
-	$designs = designs_index($db, $search_term);
+	$designs = empty($search_term) ? get_designs($db): search_designs($db, $search_term);
 	$designs = $designs->fetchAll(PDO::FETCH_ASSOC);
 } catch(Exception $e) {
 	$designs = [];

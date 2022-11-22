@@ -1,3 +1,9 @@
+-- truncate related tables
+TRUNCATE Design;
+TRUNCATE Engineering_Designs;
+TRUNCATE User;
+TRUNCATE Employee;
+
 -- create designs
 INSERT INTO Design (`Design_No`, `Budget`)
 VALUES (1, 3500.0000);
@@ -35,6 +41,23 @@ VALUES(
 	'Engineering'
 ); 
 
+INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
+VALUES(
+	2,
+	'Jaxon',
+	'Braun',
+	'2000-01-01', 
+	'123456', 
+	'jaxonbraun@worc.com',
+	'Address Line 1',
+	'Address Line 2',
+	'Calgary',
+	'Alberta',
+	'Canada',
+	'Postal', 
+	'Engineering'
+); 
+
 -- insert author
 INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
 VALUES (1, 1);
@@ -54,6 +77,18 @@ VALUES (1, 5);
 INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
 VALUES (1, 6);
 
+INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
+VALUES (2, 4);
+
+INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
+VALUES (2, 5);
+
+INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
+VALUES (2, 6);
+
 -- insert user for employee/author
 INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
-VALUES ('rupertraphael', 'password', 'Regular', 1)
+VALUES ('rupertraphael', 'password', 'Regular', 1);
+
+INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES ('jaxonbraun', 'password', 'Regular', 2);
