@@ -1,4 +1,11 @@
 <?php
+/**
+ * Must be in every page that uses sessions; including but not limited to:
+ * - pages that require log in
+ *
+ * also contains helper functions and easily accessible configuration variables.
+ */
+
 session_start();
 
 /**
