@@ -1,5 +1,6 @@
 <?php
 require_once('../init.php');
+require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/design.php');
 require_once('../data/employee.php');
