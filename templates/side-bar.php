@@ -4,6 +4,8 @@
 			<a href="#">Clients</a>
 		</li>
 		<li class="py-2 px-4">Projects</li>
-		<li class="py-2 px-4">Designs</li>
+		<li class="py-2 px-4">
+			<a href="/designs" class="hover:text-blue-500">Designs</a>
+		</li>
 	</ul>
 </nav>

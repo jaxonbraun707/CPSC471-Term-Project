@@ -86,7 +86,7 @@ SELECT
   User.username
 FROM Design, Engineering_Designs, Employees, User
 WHERE
-  Deisgn.Design_No = Engineering_Designs.Design_No AND
+  Design.Design_No = Engineering_Designs.Design_No AND
   Engineering_Designs.Eng_SSN = Employee.SSN AND
   Employee.SSN = User.ESSN AND
   (
