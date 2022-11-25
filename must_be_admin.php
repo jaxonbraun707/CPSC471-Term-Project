@@ -22,6 +22,6 @@ function is_admin() {
  * let code under this execute.
  */
 if(!is_admin()) {
-	include_once('templates/401.php');
+	include_once(BASE_PATH . '/templates/401.php');
 	die();
 }

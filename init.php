@@ -8,6 +8,8 @@
 
 session_start();
 
+require_once('env.php');
+
 /**
  * returns value of error in SESSION global and the SESSION.
  * @return array array containing the error

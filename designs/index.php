@@ -44,10 +44,10 @@ include('../templates/top-bar.php');
 				?>
 				<h1 class="text-xl font-semibold">Designs</h1>
 				<div class="text-right">
-					<a href="/designs/create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
+					<a href="create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
 				</div>
 			</div>
-			<form class="m-4" method="GET" action="/designs/index.php">
+			<form class="m-4" method="GET" action="index.php">
 				<input class="border px-2 rounded" type="search" placeholder="Enter Design No. or Author" name="search_term" value="<?=$search_term?>">
 				<button class="hover:text-blue-400 hover:border-blue-400 border px-2 text-black rounded font-semibold" type="submit">Search for Design</button>
 			</form>

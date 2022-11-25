@@ -12,7 +12,7 @@ $authors = $_POST['authors'] ?? [];
 if(empty($design_no) || empty($budget) || empty($authors)) {
 	$error = 'Design and budget are required.';
 	$_SESSION['error'] = $error;
-	header("Location: /designs/create.php", TRUE, 200);
+	header("Location: create.php", TRUE, 200);
 	die();
 }
 
@@ -20,6 +20,6 @@ add_design($db, $design_no, $budget, $authors);
 
 // successfully redirect back to designs listing
 // return status code 200 as a sign that the post request was successful
-header("Location: /designs/index.php", TRUE, 200);
+header("Location: index.php", TRUE, 200);
 die();
 ?>
