@@ -43,6 +43,15 @@ function add_design($db, $design_no, $budget, $authors) {
 	}
 }
 
+function delete_design($db, $design_no) {
+	$q = "
+		DELETE FROM Design WHERE Design_No = :design_no
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no]);
+	return $query;
+}
+
 /**
  * query for retrieving all designs
  * @param  PDO $db
@@ -60,6 +69,73 @@ function get_designs($db) {
 		GROUP BY Design_No
 		";
 	return $db->query($q);
+}
+
+function find_design($db, $design_no) {
+	$q = "
+		SELECT  
+			Design.*
+		FROM Design
+		WHERE
+			Design.Design_No = :design_no
+		";
+	$query = $db->prepare($q);
+	$query->execute([':design_no' => $design_no]);
+	return $query;
+}
+
+function get_new_design_authors($db, $design_no, $job) {
+	$q = "
+		SELECT  
+			Employee.*
+		FROM Employee
+		WHERE
+			Employee.Job_Type = :job AND
+			Employee.SSN NOT IN (
+				SELECT Eng_SSN FROM Engineering_Designs
+				WHERE Design_No = :design_no
+			)
+		";
+	$query = $db->prepare($q);
+	$query->execute([':design_no' => $design_no, ':job' => $job]);
+	return $query;
+}
+
+function find_design_authors($db, $design_no) {
+	$q = "
+		SELECT  
+			Employee.*
+		FROM Design, Engineering_Designs, Employee
+		WHERE
+			Design.Design_No = :design_no AND
+			Design.Design_No = Engineering_Designs.Design_No AND
+			Engineering_Designs.Eng_SSN = Employee.SSN
+		";
+	$query = $db->prepare($q);
+	$query->execute([':design_no' => $design_no]);
+	return $query;
+}
+
+function add_design_author($db, $design_no, $ssn) {
+	$q = "
+		INSERT INTO Engineering_Designs (Design_No, Eng_SSN)
+		VALUES (:design_no, :ssn);
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no, 'ssn' => $ssn]);
+	return $query;
+} 
+
+function delete_design_author($db, $design_no, $ssn) {
+	$q = "
+		DELETE FROM Engineering_Designs
+		WHERE 
+			design_no = :design_no AND
+			Eng_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no, 'ssn' => $ssn]);
+	return $query;
 }
 
 /**
@@ -89,5 +165,16 @@ function search_designs($db, $search_term) {
 	$query = $db->prepare($q);
 	$query->execute([':search_term' => "%$search_term%"]);
 
+	return $query;
+}
+
+function update_design($db, $design_no, $budget, $new_design_no) {
+	$q = "
+		UPDATE Design
+		SET Design_No = :new_design_no, Budget = :budget
+		WHERE Design_No = :design_no;
+	";
+	$query = $db->prepare($q);
+	$query->execute([':design_no' => $design_no, ':budget' => $budget, ':new_design_no' => $new_design_no]);
 	return $query;
 }
