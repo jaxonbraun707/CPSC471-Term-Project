@@ -7,6 +7,7 @@ require_once('../data/design.php');
 $design_no = $_POST['design_no'] ?? '';
 $budget = $_POST['budget'] ?? '';
 $authors = $_POST['authors'] ?? [];
+$drawings = explode(",", $_POST['drawings']) ?? [];
 
 // redirect back to create form if either value is empty.
 if(empty($design_no) || empty($budget) || empty($authors)) {
@@ -16,7 +17,7 @@ if(empty($design_no) || empty($budget) || empty($authors)) {
 	die();
 }
 
-add_design($db, $design_no, $budget, $authors);
+add_design($db, $design_no, $budget, $authors, $drawings);
 
 // successfully redirect back to designs listing
 // return status code 200 as a sign that the post request was successful

@@ -9,7 +9,7 @@
  *
  * TODO: include drawings.
  */
-function add_design($db, $design_no, $budget, $authors) {
+function add_design($db, $design_no, $budget, $authors, $drawings) {
 	$design_q = "
 		INSERT INTO Design (Design_No, Budget)
 		VALUES (:design_no, :budget)
@@ -20,16 +20,27 @@ function add_design($db, $design_no, $budget, $authors) {
 		VALUES (:author, :design_no)
 	";
 
+	$drawing_q = "
+		INSERT INTO Drawings (Design_No, Drawing_No)
+		VALUES (:design_no, :drawing_no)
+	";
+
 	if ($db->beginTransaction()) {
 		try {
 			// insert designs
 	    	$query = $db->prepare($design_q);
 			$query->execute([':design_no' => $design_no, ':budget' => $budget]);
 
-			// assocate designs with authors
+			// associate designs with authors
 			foreach($authors as $author) {
 				$query = $db->prepare($author_q);
 				$query->execute([':design_no' => $design_no, ':author' => $author]);
+			}
+
+			// associate designs with drawings
+			foreach($drawings as $drawing) {
+				$query = $db->prepare($drawing_q);
+				$query->execute([':design_no' => $design_no, ':drawing_no' => $drawing]);
 			}
 
 	    	return $db->commit();
@@ -135,6 +146,39 @@ function delete_design_author($db, $design_no, $ssn) {
 	";
 	$query = $db->prepare($q);
 	$query->execute(['design_no' => $design_no, 'ssn' => $ssn]);
+	return $query;
+}
+
+function find_design_drawings($db, $design_no) {
+	$q = "
+		SELECT * FROM Drawings
+		WHERE 
+			design_no = :design_no
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no]);
+	return $query;
+}
+
+function add_design_drawing($db, $design_no, $drawing) {
+	$q = "
+		INSERT INTO Drawings (Design_No, Drawing_No)
+		VALUES (:design_no, :drawing)
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no, 'drawing' => $drawing]);
+	return $query;
+}
+
+function delete_design_drawing($db, $design_no, $drawing) {
+	$q = "
+		DELETE FROM Drawings
+		WHERE 
+			design_no = :design_no AND
+			Drawing_No = :drawing
+	";
+	$query = $db->prepare($q);
+	$query->execute(['design_no' => $design_no, 'drawing' => $drawing]);
 	return $query;
 }
 

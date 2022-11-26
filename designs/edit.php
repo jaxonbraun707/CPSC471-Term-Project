@@ -10,6 +10,7 @@ $error = NULL;
 $design_no = $_GET['id'] ?? '';
 $design = find_design($db, $design_no);
 $authors = find_design_authors($db, $design_no);
+$drawings = find_design_drawings($db, $design_no);
 // retrieve new_authors needed for the authors field.
 $new_authors = [];
 $new_authors = get_new_design_authors($db, $design_no, $_job_types['engineering']);
@@ -21,6 +22,10 @@ if(!empty($design)) {
 
 if(!empty($authors)) {
 	$authors = $authors->fetchAll();
+}
+
+if(!empty($drawings)) {
+	$drawings = $drawings->fetchAll();
 }
 
 include('../templates/top.php');
@@ -132,6 +137,41 @@ include('../templates/top-bar.php');
 							<img src="#" alt="Design Image Placeholder">						
 						</div>
 					</div>
+				</section>
+				<section>
+					<table class="w-full" style="max-height: 500px;">
+						<thead>
+							<tr>
+								<td class="mt-4 py-2 font-bold border-b" colspan="2">Drawings</td>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							foreach($drawings as $drawing) {
+							?>
+							<tr>
+								<td class="py-2">
+									<?=$drawing['Drawing_No']?>
+								</td>
+								<td class="text-right py-2">
+									<form method="POST" action="<?=BASE_URL?>/designs/delete_drawing.php">
+										<input type="hidden" name="design_no" value="<?=$design['Design_No']?>">
+										<input type="hidden" name="drawing" value="<?=$drawing['Drawing_No']?>">
+										<button type="submit" class="hover:text-red-500">Remove</button>
+									</form>
+								</td>
+							</tr>
+							<?php
+							}
+							?>
+						</tbody>
+					</table>
+					<form method="POST" action="<?=BASE_URL?>/designs/add_drawing.php">
+						<input type="hidden" name="design_no" value="<?=$design['Design_No']?>">
+						<label>Add a drawing:</label>
+						<input type="number" name="drawing" class="py-2 border rounded pl-2 w-32">
+						<button class="hover:text-blue-500" type="submit">Add</button>
+					</form>
 				</section>
 				<section>
 					<h2 class="mt-4 py-2 font-bold border-b">Used by the following Projects</h2>
