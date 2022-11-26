@@ -1,5 +1,14 @@
 <?php
+/**
+ * Must be in every page that uses sessions; including but not limited to:
+ * - pages that require log in
+ *
+ * also contains helper functions and easily accessible configuration variables.
+ */
+
 session_start();
+
+require_once('env.php');
 
 /**
  * returns value of error in SESSION global and the SESSION.
@@ -21,3 +30,19 @@ $_job_types = [
 	'engineering' => 'Engineering',
 	'labour' => 'Labour'
 ];
+
+function job_types() {
+	return [
+		'sales' => 'Sales',
+		'engineering' => 'Engineering'
+    'labour' => 'Labour'
+	];
+}
+
+function user_types() {
+	return [
+		'admin' => 'Admin',
+		'regular' => 'Regular'
+	];
+}
+

@@ -1,4 +1,10 @@
 <?php
+/**
+ * query for retrieving employees by a job
+ * @param  PDO $db
+ * @param  string $job
+ * @return PDO query object object
+ */
 function get_employees_by_job($db, $job) {
 	$q = "
 		SELECT * FROM Employee, User
@@ -9,7 +15,6 @@ function get_employees_by_job($db, $job) {
 
 	return $query;
 }
-
 
 function add_employee($db, $SSN, $First_Name, $Last_Name, $DOB, $Phone_No, $Email, $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip, $Job_Type, $Sales_Region, $Eng_Specialty, $Lab_Specialty) {
 	$emp_q = "
@@ -91,5 +96,21 @@ function search_employees($db, $search_term) {
 	$query = $db->prepare($q);
 	$query->execute([':search_term' => "%$search_term%"]);
 	return $query;
+}
 
+/**
+ * Find an employee by an SSN
+ * @param  PDO $db
+ * @param  string $ssn
+ * @return PDO query object
+ */
+function find_employee($db, $ssn) {
+	$q = "
+		SELECT * FROM Employee
+		WHERE SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute([':ssn' => $ssn]);
+  
+	return $query;
 }

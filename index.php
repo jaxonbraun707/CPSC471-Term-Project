@@ -1,7 +1,5 @@
 <?php
-include('templates/top.php');
-?>
-<h1>Hello, World!</h1>
-<?php
-include('templates/bottom.php');
+// redirect to designs for now.
+header("Location: designs", 200);
+die();
 ?>
