@@ -16,7 +16,7 @@ try {
 } catch(Exception $e) {
 	$clients = [];
 	$error = 'Failed to execute search query or fetch data.';
-}
+} 
 
 include('../templates/top.php');
 ?>

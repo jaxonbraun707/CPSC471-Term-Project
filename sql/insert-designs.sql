@@ -58,6 +58,24 @@ VALUES(
 	'Engineering'
 ); 
 
+INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
+VALUES(
+	3,
+	'Gareth',
+	'Jenkins',
+	'2010-01-01', 
+	'123456', 
+	'garethjenkins@worc.com',
+	'Address Line 1',
+	'Address Line 2',
+	'Calgary',
+	'Alberta',
+	'Canada',
+	'Postal', 
+	'Engineering'
+); 
+
+
 -- insert author
 INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
 VALUES (1, 1);
@@ -92,3 +110,6 @@ VALUES ('rupertraphael', 'password', 'Regular', 1);
 
 INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
 VALUES ('jaxonbraun', 'password', 'Regular', 2);
+
+INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES ('garethjenkins', 'password', 'Regular', 3);

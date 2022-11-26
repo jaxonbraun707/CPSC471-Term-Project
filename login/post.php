@@ -44,6 +44,6 @@ if(empty($employee)) {
 $_SESSION['user'] = $user;
 $_SESSION['user']['employee'] = $employee->fetch();
 
-header("Location: /", 200);
+header("Location: ../", 200);
 die();
 ?>
