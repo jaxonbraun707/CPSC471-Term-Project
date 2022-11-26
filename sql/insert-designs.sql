@@ -3,6 +3,9 @@ TRUNCATE Design;
 TRUNCATE Engineering_Designs;
 TRUNCATE User;
 TRUNCATE Employee;
+TRUNCATE Regions;
+TRUNCATE Eng_Specialties;
+TRUNCATE Lab_Specialties;
 
 -- create designs
 INSERT INTO Design (`Design_No`, `Budget`)
@@ -41,6 +44,12 @@ VALUES(
 	'Engineering'
 ); 
 
+INSERT INTO Eng_Specialties(`Eng_SSN`, `Eng_Specialty`)
+VALUES(
+	1,
+	'Software'
+);
+
 INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
 VALUES(
 	2,
@@ -57,6 +66,12 @@ VALUES(
 	'Postal', 
 	'Engineering'
 ); 
+
+INSERT INTO Eng_Specialties(`Eng_SSN`, `Eng_Specialty`)
+VALUES(
+	2,
+	'Software'
+);
 
 -- insert author
 INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)

@@ -27,13 +27,15 @@ function get_error_in_session() {
 // config
 $_job_types = [
 	'sales' => 'Sales',
-	'engineering' => 'Engineering'
+	'engineering' => 'Engineering',
+	'labour' => 'Labour'
 ];
 
 function job_types() {
 	return [
 		'sales' => 'Sales',
 		'engineering' => 'Engineering'
+    'labour' => 'Labour'
 	];
 }
 
@@ -43,3 +45,4 @@ function user_types() {
 		'regular' => 'Regular'
 	];
 }
+
