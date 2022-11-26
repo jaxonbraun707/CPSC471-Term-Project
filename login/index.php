@@ -4,7 +4,7 @@ require_once('../db.php');
 require_once('../login_functions.php');
 
 if(is_logged_in($db)) {
-	header("Location: /", TRUE, 200);
+	header("Location: " . BASE_URL, TRUE, 200);
 	die();
 }
 

@@ -8,6 +8,8 @@
 
 session_start();
 
+require_once('env.php');
+
 /**
  * returns value of error in SESSION global and the SESSION.
  * @return array array containing the error
@@ -25,5 +27,22 @@ function get_error_in_session() {
 // config
 $_job_types = [
 	'sales' => 'Sales',
-	'engineering' => 'Engineering'
+	'engineering' => 'Engineering',
+	'labour' => 'Labour'
 ];
+
+function job_types() {
+	return [
+		'sales' => 'Sales',
+		'engineering' => 'Engineering',
+    	'labour' => 'Labour'
+	];
+}
+
+function user_types() {
+	return [
+		'admin' => 'Admin',
+		'regular' => 'Regular'
+	];
+}
+
