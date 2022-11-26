@@ -34,8 +34,8 @@ $_job_types = [
 function job_types() {
 	return [
 		'sales' => 'Sales',
-		'engineering' => 'Engineering'
-    'labour' => 'Labour'
+		'engineering' => 'Engineering',
+    	'labour' => 'Labour'
 	];
 }
 
