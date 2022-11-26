@@ -90,5 +90,6 @@ function search_employees($db, $search_term) {
 
 	$query = $db->prepare($q);
 	$query->execute([':search_term' => "%$search_term%"]);
+	return $query;
 
 }
