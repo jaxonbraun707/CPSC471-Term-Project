@@ -267,6 +267,7 @@ CREATE TABLE Sales_Have_Clients
 (
 	Sales_SSN	INT	NOT NULL, 
 	Client_Id	INT	NOT NULL, 
+	PRIMARY KEY(Sales_SSN, Client_Id),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Client_Id) REFERENCES Client(Client_Id) 
 ); 
@@ -275,6 +276,7 @@ CREATE TABLE Sales_Have_Clients
 CREATE TABLE Sales_Proposals (
 	Sales_SSN	INT	NOT NULL, 
 	Proposal_No	INT	NOT NULL, 
+	PRIMARY KEY(Sales_SSN, Proposal_No),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ); 
 
@@ -282,6 +284,7 @@ CREATE TABLE Vendors_Provides_Parts
 (	
 	Vendor_Id	INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
+	PRIMARY KEY(Vendor_Id, Part_No),
 	FOREIGN KEY(Vendor_Id) REFERENCES Vendor(Vendor_Id), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 
 ); 
@@ -292,6 +295,7 @@ CREATE TABLE Purchase_Orders
 	Purchaser_SSN	INT	NOT NULL, 
 	Vendor_Id	INT	NOT NULL, 
 	Purchase_Order	VARCHAR(255)	NOT NULL, 
+	PRIMARY KEY(Purchaser_SSN, Vendor_Id),
 	FOREIGN KEY(Purchaser_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Vendor_ID) REFERENCES Vendor(Vendor_Id) 
 ); 
@@ -302,6 +306,7 @@ CREATE TABLE Labour_Order
 	Order_No	INT	NOT NULL, 
 	Start_Date	DATE	NOT NULL, 
 	Hours	INT	NOT NULL, 
+	PRIMARY KEY(Labour_SSN, Order_No),
 	FOREIGN KEY(Labour_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Order_No) REFERENCES Orders(Order_No) 
 ); 
@@ -312,6 +317,31 @@ CREATE TABLE Parts_Inventory
 	Order_No INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
 	Qty	INT	NOT NULL, 
+	PRIMARY KEY(Order_No, Part_No),
 	FOREIGN KEY(Order_No) REFERENCES Orders(Order_No), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 
 ); 
+
+CREATE TABLE Regions 
+(
+	Sales_SSN	INT		NOT NULL,
+	Sales_Region	VARCHAR(255),
+	PRIMARY KEY(Sales_SSN),
+	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN)
+);
+
+CREATE TABLE Eng_Specialties
+(
+	Eng_SSN		INT		NOT NULL,
+	Eng_Specialty	VARCHAR(255),
+	PRIMARY KEY(Eng_SSN),
+	FOREIGN KEY(Eng_SSN) REFERENCES Employee(SSN)
+);
+
+CREATE TABLE Lab_Specialties
+(
+	Lab_SSN		INT		NOT NULL,
+	Lab_Specialty	VARCHAR(255),
+	PRIMARY KEY(Lab_SSN),
+	FOREIGN KEY(Lab_SSN) REFERENCES Employee(SSN)
+);

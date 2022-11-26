@@ -34,8 +34,8 @@ function add_design($db, $design_no, $budget, $authors) {
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {
-	    	if ($dbh->inTransaction()) {
-	       		$dbh->rollBack();
+	    	if ($db->inTransaction()) {
+	       		$db->rollBack();
 
 	       		throw $e;
 	      	}        

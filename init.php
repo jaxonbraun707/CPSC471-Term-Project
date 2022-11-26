@@ -18,5 +18,6 @@ function get_error_in_session() {
 // config
 $_job_types = [
 	'sales' => 'Sales',
-	'engineering' => 'Engineering'
+	'engineering' => 'Engineering',
+	'labour' => 'Labour'
 ];
