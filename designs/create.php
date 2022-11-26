@@ -38,7 +38,7 @@ include('../templates/top-bar.php');
 			?>
 			<h1 class="text-xl font-semibold m-4">Add a Design</h1>
 
-			<form class="m-4" method="POST" action="post.php">
+			<form class="m-4" method="POST" action="<?=BASE_URL?>/designs/post.php">
 				<div class="mb-4">
 					<input type="number" name="design_no" class="border px-2 rounded" placeholder="Enter Design No.">
 				</div>
@@ -47,7 +47,7 @@ include('../templates/top-bar.php');
 				</div>
 				<div class="mb-4">
 					<label for="authors">Select Authors:</label>
-					<select name="authors[]" id="authors" multiple class="border">
+					<select name="authors[]" id="authors" multiple class="border align-top">
 						<?php
 						foreach($employees as $employee) {
 						?>
@@ -56,6 +56,9 @@ include('../templates/top-bar.php');
 						}
 						?>
 					</select>
+				</div>
+				<div class="mb-4">
+					<textarea name="drawings" class="border px-2 rounded w-64 h-32" placeholder="Enter drawing numbers. E.g. 1,2,3"></textarea>
 				</div>
 				<div>
 					<button type="submit" name="submit" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</button>

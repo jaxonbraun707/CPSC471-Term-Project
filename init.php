@@ -30,6 +30,13 @@ $_job_types = [
 	'engineering' => 'Engineering'
 ];
 
+function job_types() {
+	return [
+		'sales' => 'Sales',
+		'engineering' => 'Engineering'
+	];
+}
+
 function user_types() {
 	return [
 		'admin' => 'Admin',
