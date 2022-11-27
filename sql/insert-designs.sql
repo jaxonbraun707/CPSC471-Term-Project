@@ -67,7 +67,6 @@ VALUES(
 	'Engineering'
 ); 
 
-<<<<<<< HEAD
 INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
 VALUES(
 	3,
@@ -85,13 +84,11 @@ VALUES(
 	'Engineering'
 ); 
 
-=======
 INSERT INTO Eng_Specialties(`Eng_SSN`, `Eng_Specialty`)
 VALUES(
 	2,
 	'Software'
 );
->>>>>>> e8acaaa7992b56ba9af954ac2d0f6c9a0720d8c2
 
 -- insert author
 INSERT INTO Engineering_Designs (`Eng_SSN`, `Design_No`)
