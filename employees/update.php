@@ -6,7 +6,7 @@ require_once('../data/employee.php');
 
 $SSN = $_POST['ssn'] ?? '';
 $first_name = $_POST['first_name'] ?? '';
-$last_name = $_POST['nast_name'] ?? '';
+$last_name = $_POST['last_name'] ?? '';
 $DOB = $_POST['dob'] ?? '';
 $phone_no = $_POST['phone_no'] ?? '';
 $email = $_POST['email'] ?? '';
