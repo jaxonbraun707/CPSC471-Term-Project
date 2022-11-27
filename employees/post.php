@@ -1,5 +1,6 @@
 <?php
 require_once('../init.php');
+require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/employee.php');
 
@@ -17,8 +18,8 @@ $country = $_POST['Country'] ?? '';
 $postal_zip = $_POST['Postal_Zip'] ?? '';
 $job_type = $_POST['Job_Type'] ?? '';
 $sales_region = $_POST['Sales_Region'] ?? '';
-$eng_specialty = $POST_['Eng_Specialty'] ?? '';
-$lab_specialty = $POST_['Lab_Specialty'] ?? '';
+$eng_specialty = $_POST['Eng_Specialty'] ?? '';
+$lab_specialty = $_POST['Lab_Specialty'] ?? '';
 
 if(empty($SSN) || empty($first_name) || empty($last_name) || empty($DOB) || empty($phone_no) || empty($email) || empty($address_line_1) || empty($address_line_2) || empty($city) || empty($prov_state) || empty($country) || empty($postal_zip) || empty($job_type)){
 	$error = 'All Fields are required except for the last 3';
