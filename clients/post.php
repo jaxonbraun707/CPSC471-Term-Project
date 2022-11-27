@@ -17,7 +17,9 @@ $prov_state = $_POST['Prov_State'] ?? '';
 $country = $_POST['Country'] ?? '';
 $postal_zip = $_POST['Postal_Zip'] ?? '';
 
-if(empty($client_Id) || empty($contact_name) || empty($address_line_1) || empty($city) || empty($prov_state) || empty($country) || empty($postal_zip)){
+
+
+if(empty($client_Id) || empty($contact_Name) || empty($address_line_1) || empty($city) || empty($prov_state) || empty($country) || empty($postal_zip)){
 	$error = 'Client ID, Contact Name, Address Line 1, City, Prov/State, Country, Postal/Zip fields are required';
 	$_SESSION['error'] = $error;
 	header("Location: ../clients/create.php");

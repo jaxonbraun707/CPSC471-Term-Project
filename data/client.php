@@ -10,8 +10,7 @@ function get_clients($db) {
 	$q = "
 		SELECT  
 			    *
-		FROM CLIENT AS C
-		GROUP BY C.Company_Name
+		FROM CLIENT
 		";
 	return $db->query($q);
 }
@@ -33,9 +32,11 @@ function search_clients($db, $search_term) {
                 C.Contact_Name LIKE :search_term OR
                 C.Prov_State LIKE :search_term
             )
-        GROUP BY Company_Name
 		";
-	return $db->query($q);
+		
+		$query = $db->prepare($q);
+		$query->execute([':search_term' => "%$search_term%"]);
+		return $query;
 }
 
 
@@ -43,21 +44,21 @@ function search_clients($db, $search_term) {
  * 
  * query for adding clients to the database
  * @param  PDO $db
- * @param  $client_Id, $email, $contact_Name, $company_Name, $website, $phone_No 
- * @param  $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip
+ * @param  $client_Id, $Email, $Contact_Name, $Company_Name, $Website, $Phone_No 
+ * @param  $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip
  * 
  **********************/
-function add_client($db, $client_Id, $email, $contact_Name, $company_Name, $website, $phone_No, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip) {
+function add_client($db, $Client_Id, $Email, $Contact_Name, $Company_Name, $Website, $Phone_No, $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip) {
 	$client_q = "
-		INSERT INTO Employee
-		VALUES (:Client_Id, :Contact_Name, :Company_Name, :Website, :Phone_No, :Address_Line_1, :Address_Line_2, :City, :Prov_State, :Country, :Postal_Zip)
+		INSERT INTO Client
+		VALUES (:Client_Id, :Email, :Contact_Name, :Company_Name, :Website, :Phone_No, :Address_Line_1, :Address_Line_2, :City, :Prov_State, :Country, :Postal_Zip)
 	";
 
 	if ($db->beginTransaction()) {
 		try {
 			// insert client
 			$query = $db->prepare($client_q);
-			$query->execute([':Client_Id' => $Client_Id, ':Contact_Name' => $Contact_Name, ':Company_Name' => $Company_Name, ':Website' => $Website, ':Phone_No' => $Phone_No, ':Address_Line_1' => $Address_Line_1, ':Address_Line_2' => $Address_Line_2, ':City' => $City, ':Prov_State' => $Prov_State, ':Country' => $Country, ':Postal_Zip' => $Postal_Zip]);
+			$query->execute([':Client_Id' => $Client_Id, 'Email' => $Email, ':Contact_Name' => $Contact_Name, ':Company_Name' => $Company_Name, ':Website' => $Website, ':Phone_No' => $Phone_No, ':Address_Line_1' => $Address_Line_1, ':Address_Line_2' => $Address_Line_2, ':City' => $City, ':Prov_State' => $Prov_State, ':Country' => $Country, ':Postal_Zip' => $Postal_Zip]);
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {
