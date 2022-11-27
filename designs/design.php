@@ -60,7 +60,7 @@ include('../templates/top-bar.php');
 								<dd class="text-xl"><?=number_format($design['Budget'], 2).' CAD' ?></dd>
 							</dl>
 							<div class="text-right">
-								<a href="<?=BASE_URL?>/designs/edit.php?id=<?=$design_no?>" class="hover:text-blue-500">Edit</a>
+								<a href="/<?=BASE_URL?>/designs/edit.php?id=<?=$design_no?>" class="hover:text-blue-500">Edit</a>
 							</div>
 						</div>
 
@@ -143,7 +143,7 @@ include('../templates/top-bar.php');
 									<?=$drawing['Drawing_No']?>
 								</td>
 								<td class="text-right py-2">
-									<form method="POST" action="<?=BASE_URL?>/designs/delete_drawing.php">
+									<form method="POST" action="/<?=BASE_URL?>/designs/delete_drawing.php">
 										<input type="hidden" name="design_no" value="<?=$design['Design_No']?>">
 										<input type="hidden" name="drawing" value="<?=$drawing['Drawing_No']?>">
 										<button type="submit" class="hover:text-red-500">Remove</button>
@@ -155,7 +155,7 @@ include('../templates/top-bar.php');
 							?>
 						</tbody>
 					</table>
-					<form method="POST" action="<?=BASE_URL?>/designs/add_drawing.php">
+					<form method="POST" action="/<?=BASE_URL?>/designs/add_drawing.php">
 						<input type="hidden" name="design_no" value="<?=$design['Design_No']?>">
 						<label>Add a drawing:</label>
 						<input type="number" name="drawing" class="py-2 border rounded pl-2 w-32">

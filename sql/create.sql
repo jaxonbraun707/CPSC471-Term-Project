@@ -251,7 +251,7 @@ CREATE TABLE Employee
 	First_Name	VARCHAR(255)	NOT NULL, 
 	Last_Name	VARCHAR(255)	NOT NULL, 
 	DOB	DATE	NOT NULL, 
-	Phone_No	INT	NOT NULL, 
+	Phone_No	BIGINT	NOT NULL, 
 	Email	VARCHAR(255), 
 	Address_Line_1		VARCHAR(255)	NOT NULL, 
 	Address_Line_2		VARCHAR(255), 
