@@ -51,6 +51,7 @@ include('../templates/top-bar.php');
                                 <dt class="text-xl">Contact Name: <?=$client['Contact_Name'] ?? ''?></dt>
                                 <dt class="text-xl">Email: <?=$client['Email'] ?? ''?></dt>
                                 <dt class="text-xl">Website: <?=$client['Website'] ?? ''?></dt>
+								<dt class="text-xl">Phone: <?=$client['Phone_No'] ?? ''?></dt>
                                 <dt class="text-xl">Address Line 1: <?=$client['Address_Line_1'] ?? ''?></dt>
                                 <dt class="text-xl">Address Line 2: <?=$client['Address_Line_2'] ?? ''?></dt>
                                 <dt class="text-xl">City: <?=$client['City'] ?? ''?></dt>

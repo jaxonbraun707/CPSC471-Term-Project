@@ -45,7 +45,7 @@ include('../templates/top-bar.php');
 							<dl class="grow">
 								<dt class="font-bold text-2xl">
 									Client Id
-									<input class="border w-64 pl-2" type="number" name="New_Client_Id" value="<?=$client['New_Client_Id']?>">
+									<input class="border w-64 pl-2" type="number" name="New_Client_Id" value="<?=$client['Client_Id']?>">
 								</dt>
 								<dt class="text-xl">
                                     Company Name
@@ -53,7 +53,7 @@ include('../templates/top-bar.php');
 								</dt>
                                 <dt class="text-xl">
                                     Contact Name
-									<input class="border w-64 pl-2" type="text" name="Contact Name" value="<?=$client['Contact Name']?>">
+									<input class="border w-64 pl-2" type="text" name="Contact_Name" value="<?=$client['Contact_Name']?>">
 								</dt>
                                 <dt class="text-xl">
                                     Email
