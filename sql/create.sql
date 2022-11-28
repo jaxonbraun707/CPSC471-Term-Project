@@ -241,7 +241,7 @@ CREATE TABLE Vendor
 (
 	Vendor_Id	INT	NOT NULL, 
 	Vendor_Name	VARCHAR(20)	NOT NULL, 
-	Phone_No	INT, 
+	Phone_No	BIGINT, 
 	PRIMARY KEY(Vendor_Id) 
 ); 
 
