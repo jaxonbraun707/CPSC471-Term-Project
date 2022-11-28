@@ -181,11 +181,11 @@ ALTER TABLE `Submittals_Attachments`
 
 CREATE TABLE Client
 	(Client_Id			INT			NOT NULL,
-	 Email			VARCHAR(255),
-	 Contact_Name		VARCHAR(255),
 	 Company_Name		VARCHAR(255),
+	 Contact_Name		VARCHAR(255)    NOT NULL,
+	 Email				VARCHAR(255),
+	 Phone_No			BIGINT,
 	 Website			VARCHAR(255),
-	 Phone_No			INT,
 	 Address_Line_1		VARCHAR(255)	NOT NULL,
 	 Address_Line_2		VARCHAR(255),
 	 City				VARCHAR(255)	NOT NULL,
@@ -212,14 +212,14 @@ CREATE TABLE Contract
 	 Expiry_Date		DATE,
      Client_Id			INT NOT NULL,
 	 PRIMARY KEY (Proposal_No, Contract_No),
-	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) );
+	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE );
 
 CREATE TABLE Client_Proposals
 	(Client_Id			INT			NOT NULL,
 	 Proposal_No		INT			NOT NULL,
 	 PRIMARY KEY (Client_Id, Proposal_No),
-	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id),
-	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No)
+	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE,
+	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE
 	);
 
 CREATE TABLE Orders
@@ -251,7 +251,7 @@ CREATE TABLE Employee
 	First_Name	VARCHAR(255)	NOT NULL, 
 	Last_Name	VARCHAR(255)	NOT NULL, 
 	DOB	DATE	NOT NULL, 
-	Phone_No	INT	NOT NULL, 
+	Phone_No	BIGINT	NOT NULL, 
 	Email	VARCHAR(255), 
 	Address_Line_1		VARCHAR(255)	NOT NULL, 
 	Address_Line_2		VARCHAR(255), 
@@ -267,6 +267,7 @@ CREATE TABLE Sales_Have_Clients
 (
 	Sales_SSN	INT	NOT NULL, 
 	Client_Id	INT	NOT NULL, 
+	PRIMARY KEY(Sales_SSN, Client_Id),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Client_Id) REFERENCES Client(Client_Id) 
 ); 
@@ -275,6 +276,7 @@ CREATE TABLE Sales_Have_Clients
 CREATE TABLE Sales_Proposals (
 	Sales_SSN	INT	NOT NULL, 
 	Proposal_No	INT	NOT NULL, 
+	PRIMARY KEY(Sales_SSN, Proposal_No),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ); 
 
@@ -282,6 +284,7 @@ CREATE TABLE Vendors_Provides_Parts
 (	
 	Vendor_Id	INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
+	PRIMARY KEY(Vendor_Id, Part_No),
 	FOREIGN KEY(Vendor_Id) REFERENCES Vendor(Vendor_Id), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 
 ); 
@@ -292,6 +295,7 @@ CREATE TABLE Purchase_Orders
 	Purchaser_SSN	INT	NOT NULL, 
 	Vendor_Id	INT	NOT NULL, 
 	Purchase_Order	VARCHAR(255)	NOT NULL, 
+	PRIMARY KEY(Purchaser_SSN, Vendor_Id),
 	FOREIGN KEY(Purchaser_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Vendor_ID) REFERENCES Vendor(Vendor_Id) 
 ); 
@@ -302,6 +306,7 @@ CREATE TABLE Labour_Order
 	Order_No	INT	NOT NULL, 
 	Start_Date	DATE	NOT NULL, 
 	Hours	INT	NOT NULL, 
+	PRIMARY KEY(Labour_SSN, Order_No),
 	FOREIGN KEY(Labour_SSN) REFERENCES Employee(SSN), 
 	FOREIGN KEY(Order_No) REFERENCES Orders(Order_No) 
 ); 
@@ -312,6 +317,31 @@ CREATE TABLE Parts_Inventory
 	Order_No INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
 	Qty	INT	NOT NULL, 
+	PRIMARY KEY(Order_No, Part_No),
 	FOREIGN KEY(Order_No) REFERENCES Orders(Order_No), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 
 ); 
+
+CREATE TABLE Regions 
+(
+	Sales_SSN	INT		NOT NULL,
+	Sales_Region	VARCHAR(255),
+	PRIMARY KEY(Sales_SSN),
+	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN)
+);
+
+CREATE TABLE Eng_Specialties
+(
+	Eng_SSN		INT		NOT NULL,
+	Eng_Specialty	VARCHAR(255),
+	PRIMARY KEY(Eng_SSN),
+	FOREIGN KEY(Eng_SSN) REFERENCES Employee(SSN)
+);
+
+CREATE TABLE Lab_Specialties
+(
+	Lab_SSN		INT		NOT NULL,
+	Lab_Specialty	VARCHAR(255),
+	PRIMARY KEY(Lab_SSN),
+	FOREIGN KEY(Lab_SSN) REFERENCES Employee(SSN)
+);

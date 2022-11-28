@@ -1,11 +1,10 @@
-
 <?php
 require_once('../init.php');
 require_once('../must_be_logged_in.php');
 require_once('../db.php');
-require_once('../data/employee.php');
+require_once('../data/client.php');
 
-$title = 'Add an Employee';
+$title = 'Add a Client';
 $error = get_error_in_session();
 
 include('../templates/top.php');
@@ -31,26 +30,26 @@ include('../templates/top-bar.php');
 			<?php
 				}
 			?>
-			<h1 class="text-xl font-semibold m-4">Add an Employee</h1>
+			<h1 class="text-xl font-semibold m-4">Add a Client</h1>
 
-			<form class="m-4" method="POST" action="post.php">
+			<form class="m-4" method="POST" action="../clients/post.php">
 				<div class="mb-4">
-					<input type="number" name="SSN" class="border px-2 rounded" placeholder="Enter SSN">
+					<input type="number" name="Client_Id" class="border px-2 rounded" placeholder="Enter Client_Id">
 				</div>
 				<div class="mb-4">
-					<input type="text" name="First_Name" class="border px-2 rounded w-64" placeholder="Enter First Name">
+					<input type="text" name="Email" class="border px-2 rounded w-64" placeholder="Enter Email Address">
 				</div>
                 <div class="mb-4">
-					<input type="text" name="Last_Name" class="border px-2 rounded w-64" placeholder="Enter Last Name">
+					<input type="text" name="Contact_Name" class="border px-2 rounded w-64" placeholder="Enter Contact Name">
 				</div>
                 <div class="mb-4">
-					<input type="text" name="DOB" class="border px-2 rounded w-64" placeholder="YYYY-MM-DD">
+					<input type="text" name="Company_Name" class="border px-2 rounded w-64" placeholder="Enter Company Name">
+				</div>
+                <div class="mb-4">
+					<input type="text" name="Website" class="border px-2 rounded w-64" placeholder="Enter Website Address">
 				</div>
                 <div class="mb-4">
 					<input type="number" name="Phone_No" class="border px-2 rounded w-64" placeholder="Enter Phone Number">
-				</div>
-                <div class="mb-4">
-					<input type="text" name="Email" class="border px-2 rounded w-64" placeholder="Enter Email">
 				</div>
                 <div class="mb-4">
 					<input type="text" name="Address_Line_1" class="border px-2 rounded w-64" placeholder="Enter Address Line 1">
@@ -62,7 +61,7 @@ include('../templates/top-bar.php');
 					<input type="text" name="City" class="border px-2 rounded w-64" placeholder="Enter City">
 				</div>
                 <div class="mb-4">
-					<input type="text" name="Prov_State" class="border px-2 rounded w-64" placeholder="Enter Enter Province/State">
+					<input type="text" name="Prov_State" class="border px-2 rounded w-64" placeholder="Enter Province/State">
 				</div>
                 <div class="mb-4">
 					<input type="text" name="Country" class="border px-2 rounded w-64" placeholder="Enter Country">
@@ -70,20 +69,8 @@ include('../templates/top-bar.php');
                 <div class="mb-4">
 					<input type="text" name="Postal_Zip" class="border px-2 rounded w-64" placeholder="Enter Postal/ZIP Code">
 				</div>
-                <div class="mb-4">
-					<input type="text" name="Job_Type" class="border px-2 rounded w-64" placeholder="Enter Your Job Title">
-				</div>
-				<div class="mb-4">
-					<input type="text" name="Sales_Region" class="border px-2 rounded w-64" placeholder="Enter Your Sales Region (if applicable)">
-				</div>
-				<div class="mb-4">
-					<input type="text" name="Eng_Specialty" class="border px-2 rounded w-64" placeholder="Enter Your Engineering Specialty (if applicable)">
-				</div>
-				<div class="mb-4">
-					<input type="text" name="Lab_Specialty" class="border px-2 rounded w-64" placeholder="Enter Your Labour Specialty (if applicable)">
-				</div>
 				<div>
-					<button type="submit" name="submit" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Employee</button>
+					<button type="submit" name="submit" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Client</button>
 				</div>
 			</form>
 		</main>
