@@ -181,11 +181,11 @@ ALTER TABLE `Submittals_Attachments`
 
 CREATE TABLE Client
 	(Client_Id			INT			NOT NULL,
-	 Email				VARCHAR(255),
-	 Contact_Name		VARCHAR(255),   NOT NULL
 	 Company_Name		VARCHAR(255),
-	 Website			VARCHAR(255),
+	 Contact_Name		VARCHAR(255)    NOT NULL,
+	 Email				VARCHAR(255),
 	 Phone_No			BIGINT,
+	 Website			VARCHAR(255),
 	 Address_Line_1		VARCHAR(255)	NOT NULL,
 	 Address_Line_2		VARCHAR(255),
 	 City				VARCHAR(255)	NOT NULL,
