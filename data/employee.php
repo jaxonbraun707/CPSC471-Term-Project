@@ -114,3 +114,125 @@ function find_employee($db, $ssn) {
   
 	return $query;
 }
+
+function find_regions($db, $ssn) {
+	$q = "
+		SELECT Sales_Region 
+		FROM Regions
+		WHERE Sales_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute(['ssn' => $ssn]);
+	return $query;
+}
+
+function find_eng($db, $ssn){
+	$q = "
+		SELECT Eng_Specialty 
+		FROM Eng_Specialties
+		WHERE Eng_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute(['ssn' => $ssn]);
+	return $query;
+}
+
+function find_lab($db, $ssn){
+	$q = "
+		SELECT Lab_Specialty 
+		FROM Lab_Specialties
+		WHERE Lab_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute(['ssn' => $ssn]);
+	return $query;
+}
+
+function update_employee($db, $SSN, $first_name, $last_name, $DOB, $phone_no, $email, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip, $job_type, $sales_region, $eng_specialty, $lab_specialty, $new_SSN) {
+	$emp_q = "
+		UPDATE Employee
+		SET SSN = :new_ssn, First_Name = :first_name, Last_Name = :last_name, DOB = :dob, Phone_No = :phone_no, Email = :email, Address_Line_1 = :address_line_1, Address_Line_2 = :address_line_2, City = :city, Prov_State = :prov_state, Country = :country, Postal_Zip = :postal_zip, Job_Type = :job_type
+		WHERE SSN = :ssn
+	";
+	$sales_q = "
+		UPDATE Regions
+		SET Sales_SSN = :new_ssn, Sales_Region = :sales_region
+		WHERE Sales_SSN = :ssn
+	";
+	$eng_q = "
+		UPDATE Eng_Specialties
+		SET Eng_SSN = :new_ssn, Eng_Specialty = :eng_specialty
+		WHERE Eng_SSN = :ssn
+	";
+	$lab_q = "
+		UPDATE Lab_Specialties
+		SET Lab_SSN = :new_ssn, Lab_Specialty = :lab_specialty
+		WHERE Lab_SSN = :ssn
+	";
+	$query = $db->prepare($emp_q);
+			$query->execute([':ssn' => $SSN, ':first_name' => $first_name, ':last_name' => $last_name, ':dob' => $DOB, ':phone_no' => $phone_no, ':email' => $email, ':address_line_1' => $address_line_1, ':address_line_2' => $address_line_2, ':city' => $city, ':prov_state' => $prov_state, ':country' => $country, ':postal_zip' => $postal_zip, ':job_type' => $job_type, ':new_ssn' => $new_SSN]);
+
+			if(!empty($sales_region)){
+				$query = $db->prepare($sales_q);
+				$query->execute([':ssn' => $SSN, ':sales_region' => $sales_region, ':new_ssn' => $new_SSN]);
+			}
+			else{
+				delete_sales($db, $SSN);
+			}
+
+			if(!empty($eng_specialty)){
+				$query = $db->prepare($eng_q);
+				$query->execute([':ssn' => $SSN, ':eng_specialty' => $eng_specialty, ':new_ssn' => $new_SSN]);
+			}
+			else{
+				delete_eng($db, $SSN);
+			}
+
+			if(!empty($lab_specialty)){
+				$query = $db->prepare($lab_q);
+				$query->execute([':ssn' => $SSN, ':lab_specialty' => $lab_specialty, ':new_snn' => $new_SSN]);
+			}
+			else{
+				delete_lab($db, $SSN);
+			}
+	return $query;
+}
+
+function delete_sales($db, $SSN){
+	$q = "
+		DELETE FROM Regions WHERE Sales_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute([':ssn' => $SSN]);
+	return $query;
+}
+
+function delete_eng($db, $SSN){
+	$q = "
+		DELETE FROM Eng_Specialties WHERE Eng_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute([':ssn' => $SSN]);
+	return $query;
+}
+
+function delete_lab($db, $SSN){
+	$q = "
+		DELETE FROM Lab_Specialties WHERE Lab_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute([':ssn' => $SSN]);
+	return $query;
+}
+
+function delete_employee($db, $SSN){
+	delete_sales($db, $SSN);
+	delete_eng($db, $SSN);
+	delete_lab($db, $SSN);
+	$q = "
+		DELETE FROM Employee WHERE SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute([':ssn' => $SSN]);
+	return $query;
+}

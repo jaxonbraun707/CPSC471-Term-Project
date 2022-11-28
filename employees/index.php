@@ -1,5 +1,6 @@
 <?php
 require_once('../init.php');
+require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/employee.php');
 
@@ -46,7 +47,7 @@ include('../templates/top-bar.php');
                 </div>
             </div>
             <form class="m-4" method="GET" action="index.php">
-				<input class="border px-2 rounded" type="search" placeholder="Enter Name, SSN, or Job Title" name="search_term" value="<?=$search_term?>">
+				<input class="border px-2 rounded" type="search" placeholder="Name, SSN, or Job Title" name="search_term" value="<?=$search_term?>">
 				<button class="hover:text-blue-400 hover:border-blue-400 border px-2 text-black rounded font-semibold" type="submit">Search for Employee</button>
 			</form>
 
