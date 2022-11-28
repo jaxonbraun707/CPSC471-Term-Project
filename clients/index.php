@@ -56,7 +56,7 @@ include('../templates/top-bar.php');
 			<?php
 			foreach($clients as $client) {
 			?>
-				<a href="<../clients/client.php?id=<?=$client['Company_Name']?>" class="border rounded hover:border-blue-500">
+				<a href="../clients/client.php?id=<?=$client['Client_Id']?>" class="border rounded hover:border-blue-500">
 					<section>
 						<dl class="p-2">
 							<dt class="font-bold"><?=$client['Company_Name'] ?></dt>

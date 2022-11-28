@@ -69,3 +69,60 @@ function add_client($db, $Client_Id, $Email, $Contact_Name, $Company_Name, $Webs
 	  	}
 	}
 }
+
+/**********************
+ * 
+ * Find a client by Client_Id
+ * @param  PDO $db
+ * @param  string $Client_Id
+ * @return PDO query object
+ * 
+ **********************/
+function find_client($db, $Client_Id) {
+	$q = "
+		SELECT * FROM Client
+		WHERE Client_Id = :Client_Id
+	";
+	$query = $db->prepare($q);
+	$query->execute([':Client_Id' => $Client_Id]);
+  
+	return $query;
+}
+
+
+/**********************
+ * 
+ * Delete a client by Client_Id
+ * @param  PDO $db
+ * @param  string $Client_Id
+ * @return PDO query object
+ * 
+ **********************/
+function delete_client($db, $Client_Id){
+	$q = "
+		DELETE FROM Client WHERE Client_Id = :Client_Id
+	";
+	$query = $db->prepare($q);
+	$query->execute([':Client_Id' => $Client_Id]);
+	return $query;
+}
+
+/**********************
+ * 
+ * Update a client by Client_Id
+ * @param  PDO $db
+ * @param  string $Client_Id
+ * @return PDO query object
+ * 
+ **********************/
+function update_client($db, $Client_Id, $Email, $Contact_Name, $Company_Name, $Website, $Phone_No, $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip, $New_Client_Id) {
+	$client_q = "
+		UPDATE Client
+		SET Client_Id = :New_Client_Id, Email = :Email, Contact_Name = :Contact_Name, Company_Name = :Company_Name, Website = :Website, Phone_No = :Phone_No, Address_Line_1 = :Address_Line_1, Address_Line_2 = :Address_Line_2, City = :City, Prov_State = :Prov_State, Country = :Country, Postal_Zip = :Postal_Zip
+		WHERE Client_Id = :Client_Id
+		";
+		$query = $db->prepare($client_q);
+			$query->execute([':Client_Id' => $Client_Id, ':Email' => $Email, ':Contact_Name' => $Contact_Name, ':Company_Name' => $Company_Name, ':Website' => $Website, ':Phone_No' => $Phone_No, ':Address_Line_1' => $Address_Line_1, ':Address_Line_2' => $Address_Line_2, ':City' => $City, ':Prov_State' => $Prov_State, ':Country' => $Country, ':Postal_Zip' => $Postal_Aip, ':New_Client_Id' => $New_Client_Id]);
+
+		return $query;
+}
