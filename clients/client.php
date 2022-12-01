@@ -46,7 +46,7 @@ include('../templates/top-bar.php');
 						<div class="mb-4 flex">
 							<dl class="grow">
 								<dt class="font-bold text-2xl"><?=$client['Company_Name'] ?? '' ?></dt>
-
+								
                                 <dt class="text-xl">Client Id: <?=$client['Client_Id'] ?? ''?></dt>
                                 <dt class="text-xl">Contact Name: <?=$client['Contact_Name'] ?? ''?></dt>
                                 <dt class="text-xl">Email: <?=$client['Email'] ?? ''?></dt>
