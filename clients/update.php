@@ -18,8 +18,8 @@ $country = $_POST['Country'] ?? '';
 $postal_zip = $_POST['Postal_Zip'] ?? '';
 $new_Client_Id = $_POST['New_Client_Id'] ?? '';
 
-update_client($db, $client_Id, $email, $contact_Name, $company_Name, $website, $phone_No, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip, $new_Client_Id);
+update_client($db, $client_Id, $email, $contact_Name, $company_Name, $website, $phone_No, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip);
 
-header("Location: client.php?id=$new_Client_Id");
+header("Location: client.php?id=$client_Id");
 die();
 ?>
