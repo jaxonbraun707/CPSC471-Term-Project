@@ -1,7 +1,7 @@
 <nav class="w-64 h-screen fixed pt-20 border">
 	<ul>
 		<li class="py-2 px-4">
-			<a href=../clients/index.php#">Clients</a>
+			<a href="../clients/index.php#">Clients</a>
 		</li>
 		<li class="py-2 px-4"><a href="../proposals/index.php#">Proposals</li>
 		<li class="py-2 px-4"><a href="../contracts/index.php#">Contracts</li>

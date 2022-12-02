@@ -72,7 +72,7 @@ VALUES(
 
 INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
 VALUES(
-	5,
+	6,
 	'James',
 	'Wong',
 	'1988-09-05', 
@@ -107,4 +107,4 @@ INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
         VALUES (2, 2);
 
 INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
-        VALUES (4, 3);
+        VALUES (1, 3);
