@@ -15,7 +15,9 @@ $last_name = $_SESSION['user']['employee']['Last_Name'];
       		</svg>
     	</button>
 		<nav id="top-user-dropdown-menu" class="absolute right-0 mt-2 z-10 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="top-user-dropdown" tabindex="-1">
-	  		<form method="POST" action="/logout.php">
+	  		
+			<form method="POST" action="/<?=BASE_URL . '/logout.php'?>">
+
 	  			<button type="submit" class="text-gray-700 block px-4 py-2 text-sm hover:text-blue-400" role="menuitem" tabindex="1">Log out</button>
 	  		</form>
 		</nav>
