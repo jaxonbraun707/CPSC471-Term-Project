@@ -19,14 +19,14 @@ $postal_zip = $_POST['Postal_Zip'] ?? '';
 
 
 
-if(empty($client_Id) || empty($contact_Name) || empty($address_line_1) || empty($city) || empty($prov_state) || empty($country) || empty($postal_zip)){
-	$error = 'Client ID, Contact Name, Address Line 1, City, Prov/State, Country, Postal/Zip fields are required';
+if(empty($contact_Name) || empty($address_line_1) || empty($city) || empty($prov_state) || empty($country) || empty($postal_zip)){
+	$error = 'Contact Name, Address Line 1, City, Prov/State, Country, Postal/Zip fields are required';
 	$_SESSION['error'] = $error;
 	header("Location: ../clients/create.php");
 	die();
 }
 
-add_client($db, $client_Id, $email, $contact_Name, $company_Name, $website, $phone_No, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip);
+add_client($db, $email, $contact_Name, $company_Name, $website, $phone_No, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip);
 
 // successfully redirect back to employee listing
 // return status code 200 as a sign that the post request was successful

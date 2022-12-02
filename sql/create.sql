@@ -195,10 +195,10 @@ CREATE TABLE Client
 	 PRIMARY KEY (Client_Id) );
 
 CREATE TABLE Proposal
-	(Proposal_No		INT			NOT NULL,
-	 Title			VARCHAR(255),
-	 Value			FLOAT,
-	 Issued_Date		DATE,
+	(Proposal_No		INT			    NOT NULL,
+	 Title			    VARCHAR(255)    NOT NULL,
+	 Value			    FLOAT           NOT NULL,
+	 Issued_Date		DATE            NOT NULL,
 	 Expiry_Date		DATE,
 	 PRIMARY KEY (Proposal_No) );
 
@@ -221,6 +221,13 @@ CREATE TABLE Client_Proposals
 	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE,
 	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE
 	);
+
+-- AUTO_INCREMENT for table Client
+--
+ALTER TABLE Client
+  MODIFY Client_Id int(11) NOT NULL AUTO_INCREMENT;
+
+
 
 CREATE TABLE Orders
 (
