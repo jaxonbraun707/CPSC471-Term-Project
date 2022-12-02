@@ -8,7 +8,7 @@ $Title = "Proposal";
 $error = NULL;
 
 $Proposal_No = $_GET['id'] ?? '';
-$proposal = find_client($db, $Proposal_No);
+$proposal = find_proposal($db, $Proposal_No);
 
 if(!empty($Proposal_No)) {
     $proposal = $proposal->fetch();
@@ -45,22 +45,16 @@ include('../templates/top-bar.php');
 					<div class="w-2/5 mr-4">
 						<div class="mb-4 flex">
 							<dl class="grow">
-								<dt class="font-bold text-2xl"><?=$client['Company_Name'] ?? '' ?></dt>
+								<dt class="font-bold text-2xl"><?=$proposal['Title'] ?? '' ?></dt>
 								
-                                <dt class="text-xl">Client Id: <?=$client['Client_Id'] ?? ''?></dt>
-                                <dt class="text-xl">Contact Name: <?=$client['Contact_Name'] ?? ''?></dt>
-                                <dt class="text-xl">Email: <?=$client['Email'] ?? ''?></dt>
-                                <dt class="text-xl">Website: <?=$client['Website'] ?? ''?></dt>
-								<dt class="text-xl">Phone: <?=$client['Phone_No'] ?? ''?></dt>
-                                <dt class="text-xl">Address Line 1: <?=$client['Address_Line_1'] ?? ''?></dt>
-                                <dt class="text-xl">Address Line 2: <?=$client['Address_Line_2'] ?? ''?></dt>
-                                <dt class="text-xl">City: <?=$client['City'] ?? ''?></dt>
-                                <dt class="text-xl">Province/State: <?=$client['Prov_State'] ?? ''?></dt>
-                                <dt class="text-xl">Country: <?=$client['Country'] ?? ''?></dt>
-                                <dt class="text-xl">Postal/Zip Code: <?=$client['Postal_Zip'] ?? ''?></dt>
+                                <dt class="text-xl">Proposal_No: <?=$proposal['Proposal_No'] ?? ''?></dt>
+                                <dt class="text-xl">Value: <?=$proposal['Value'] ?? ''?></dt>
+                                <dt class="text-xl">Issued_Date: <?=$proposal['Issued_Date'] ?? ''?></dt>
+                                <dt class="text-xl">Expiry_Date: <?=$proposal['Expiry_Date'] ?? ''?></dt>
+								<dt class="text-xl">Sales_SSN: <?=$proposal['Sales_SSN'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
-								<a href="../clients/edit.php?id=<?=$Client_Id?>" class="hover:text-blue-500">Edit Client</a>
+								<a href="../proposals/edit.php?id=<?=$Proposal_No?>" class="hover:text-blue-500">Edit Proposal</a>
 							</div>
 						</div>
 				</section>

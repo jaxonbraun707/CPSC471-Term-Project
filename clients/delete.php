@@ -7,13 +7,13 @@ require_once('../data/client.php');
 $Client_Id = $_GET['id'] ?? '';
 
 if(empty($Client_Id)){
-    header("Location: index.php");
+    header("Location: ../clients/index.php");
     die();
 }
 
 delete_client($db, $Client_Id);
 
-header("Location: ../client/index.php");
+header("Location: ../clients/index.php");
 die();
 
 ?>

@@ -1,6 +1,9 @@
 -- Truncate related tables
 TRUNCATE client;
 TRUNCATE proposal;
+TRUNCATE employee;
+TRUNCATE sales_proposals;
+TRUNCATE client_proposals;
 
 -- Create Clients
 INSERT INTO client (`Client_Id`, `Email`, `Contact_Name`, `Company_Name`, `Website`, `Phone_No`,
@@ -29,7 +32,7 @@ INSERT INTO proposal (`Proposal_No`, `Title`, `Value`, `Issued_Date`, `Expiry_Da
 INSERT INTO proposal (`Proposal_No`, `Title`, `Value`, `Issued_Date`, `Expiry_Date`)
         VALUES (2, 'Pumping System', 199249.00, '2022-08-10', '2022-09-10');
 
-IINSERT INTO proposal (`Proposal_No`, `Title`, `Value`, `Issued_Date`, `Expiry_Date`)
+INSERT INTO proposal (`Proposal_No`, `Title`, `Value`, `Issued_Date`, `Expiry_Date`)
         VALUES (3, 'Chiller', 1249000.00, '2021-01-09', '2021-02-09');
 
 -- Create Sales Employees
@@ -84,3 +87,24 @@ VALUES(
 	'Sales'
 ); 
 
+-- Create Sales_Proposals
+
+INSERT INTO sales_proposals (`Sales_SSN`, `Proposal_No`)
+        VALUES (6, 1);
+
+INSERT INTO sales_proposals (`Sales_SSN`, `Proposal_No`)
+        VALUES (4, 2);
+
+INSERT INTO sales_proposals (`Sales_SSN`, `Proposal_No`)
+        VALUES (5, 3);
+
+-- Create Client_Proposals
+
+INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
+        VALUES (3, 1);
+
+INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
+        VALUES (2, 2);
+
+INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
+        VALUES (4, 3);
