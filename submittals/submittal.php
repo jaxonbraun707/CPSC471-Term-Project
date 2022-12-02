@@ -70,7 +70,7 @@ include('../templates/top-bar.php');
 								</dd>
 							</dl>
 							<div class="text-right">
-								<a href="<?=BASE_URL?>/submittals/edit.php?id=<?=$submittal_no?>" class="hover:text-blue-500">Edit</a>
+								<!--<a href="<?=BASE_URL?>/submittals/edit.php?id=<?=$submittal_no?>" class="hover:text-blue-500">Edit</a>-->
 							</div>
 						</div>
 

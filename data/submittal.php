@@ -55,6 +55,28 @@ function delete_submittal_attachment($db, $submittal_no, $attachment) {
 	return $query;
 }
 
+function add_submittal_author($db, $submittal_no, $ssn) {
+	$q = "
+		INSERT INTO Engineering_Submittals (Submittal_No, Eng_SSN)
+		VALUES (:submittal_no, :ssn);
+	";
+	$query = $db->prepare($q);
+	$query->execute(['submittal_no' => $submittal_no, 'ssn' => $ssn]);
+	return $query;
+}
+
+function delete_submittal_author($db, $submittal_no, $ssn) {
+	$q = "
+		DELETE FROM Engineering_Submittals
+		WHERE 
+			submittal_no = :submittal_no AND
+			Eng_SSN = :ssn
+	";
+	$query = $db->prepare($q);
+	$query->execute(['submittal_no' => $submittal_no, 'ssn' => $ssn]);
+	return $query;
+}
+
 function find_submittal($db, $submittal_no) {
 	$q = "
 		SELECT  

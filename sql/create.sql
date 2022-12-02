@@ -75,7 +75,8 @@ CREATE TABLE `Submittal` (
 
 CREATE TABLE `Submittals_Attachments` (
   `Submittal_No` int(11) NOT NULL,
-  `Attachment_No` int(11) NOT NULL
+  `Attachment_No` int(11) NOT NULL,
+  `Filename` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
