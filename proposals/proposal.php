@@ -49,9 +49,9 @@ include('../templates/top-bar.php');
 								
                                 <dt class="text-xl">Proposal_No: <?=$proposal['Proposal_No'] ?? ''?></dt>
                                 <dt class="text-xl">Value: <?=$proposal['Value'] ?? ''?></dt>
-                                <dt class="text-xl">Issued_Date: <?=$proposal['Issued_Date'] ?? ''?></dt>
-                                <dt class="text-xl">Expiry_Date: <?=$proposal['Expiry_Date'] ?? ''?></dt>
-								<dt class="text-xl">Sales_SSN: <?=$proposal['Sales_SSN'] ?? ''?></dt>
+                                <dt class="text-xl">Issued Date: <?=$proposal['Issued_Date'] ?? ''?></dt>
+                                <dt class="text-xl">Expiry Date: <?=$proposal['Expiry_Date'] ?? ''?></dt>
+								<dt class="text-xl">Sales SSN: <?=$proposal['Sales_SSN'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
 								<a href="../proposals/edit.php?id=<?=$Proposal_No?>" class="hover:text-blue-500">Edit Proposal</a>
