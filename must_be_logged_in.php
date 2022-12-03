@@ -11,7 +11,7 @@ require_once('login_functions.php');
  * redirects to log-in page if no user is logged in
  */
 if(!is_logged_in()) {
-	$login = BASE_URL . "/login/";
+	$login = BASE_URL . "/login";
 	header("Location: $login", TRUE, 200);
 	die();
 }

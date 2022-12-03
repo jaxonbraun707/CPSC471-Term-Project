@@ -32,9 +32,7 @@ if(empty($SSN) || empty($first_name) || empty($last_name) || empty($DOB) || empt
 	die();
 }
 
-add_employee($db, $SSN, $first_name, $last_name, $DOB, $phone_no, $email, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip, $job_type, $sales_region, $eng_specialty, $lab_specialty);
-
-add_user($db, $SSN, $username, $password, $user_type);
+add_employee($db, $SSN, $first_name, $last_name, $DOB, $phone_no, $email, $address_line_1, $address_line_2, $city, $prov_state, $country, $postal_zip, $job_type, $sales_region, $eng_specialty, $lab_specialty, $username, $password, $user_type);
 
 // successfully redirect back to employee listing
 // return status code 200 as a sign that the post request was successful
