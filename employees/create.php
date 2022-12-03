@@ -1,7 +1,7 @@
 
 <?php
 require_once('../init.php');
-require_once('../must_be_logged_in.php');
+require_once('../must_be_admin.php');
 require_once('../db.php');
 require_once('../data/employee.php');
 
@@ -33,8 +33,11 @@ include('../templates/top-bar.php');
 			?>
 			<h1 class="text-xl font-semibold m-4">Add an Employee</h1>
 
-			<form class="m-4" method="POST" action="post.php">
-				<div class="mb-4">
+			<form class="m-4 grid grid-cols-2 gap-2" method="POST" action="post.php">
+				<div class="col-span-2">
+					<h2 class="text-xl">Personal Information</h2>
+				</div>
+				<div class="mb-4 col-span-2">
 					<input type="number" name="SSN" class="border px-2 rounded" placeholder="Enter SSN">
 				</div>
 				<div class="mb-4">
@@ -43,14 +46,20 @@ include('../templates/top-bar.php');
                 <div class="mb-4">
 					<input type="text" name="Last_Name" class="border px-2 rounded w-64" placeholder="Enter Last Name">
 				</div>
-                <div class="mb-4">
+                <div class="mb-4 col-span-2">
 					<input type="text" name="DOB" class="border px-2 rounded w-64" placeholder="YYYY-MM-DD">
+				</div>
+				<div class="col-span-2">
+					<h3>Contact Information</h2>
 				</div>
                 <div class="mb-4">
 					<input type="number" name="Phone_No" class="border px-2 rounded w-64" placeholder="Enter Phone Number">
 				</div>
                 <div class="mb-4">
 					<input type="text" name="Email" class="border px-2 rounded w-64" placeholder="Enter Email">
+				</div>
+				<div class="col-span-2">
+					<h3>Address</h2>
 				</div>
                 <div class="mb-4">
 					<input type="text" name="Address_Line_1" class="border px-2 rounded w-64" placeholder="Enter Address Line 1">
@@ -70,7 +79,10 @@ include('../templates/top-bar.php');
                 <div class="mb-4">
 					<input type="text" name="Postal_Zip" class="border px-2 rounded w-64" placeholder="Enter Postal/ZIP Code">
 				</div>
-                <div class="mb-4">
+				<div class="col-span-2">
+					<h2 class="text-xl">Work Information</h2>
+				</div>
+				<div class="mb-4">
 					<input type="text" name="Job_Type" class="border px-2 rounded w-64" placeholder="Enter Your Job Title">
 				</div>
 				<div class="mb-4">
@@ -82,7 +94,28 @@ include('../templates/top-bar.php');
 				<div class="mb-4">
 					<input type="text" name="Lab_Specialty" class="border px-2 rounded w-64" placeholder="Enter Your Labour Specialty (if applicable)">
 				</div>
-				<div>
+				<div class="col-span-2">
+					<h2 class="text-xl">User Information</h2>
+				</div>
+				<div class="mb-4">
+					<input type="text" name="Username" class="border px-2 rounded w-64" placeholder="Enter Username">
+				</div>
+				<div class="mb-4">
+					<input type="text" name="Password" class="border px-2 rounded w-64" placeholder="Enter Password">
+				</div>
+				<div class="mb-4">
+					Select User Type:
+					<select name="User_Type" class="border">
+						<?php
+						foreach (user_types() as $type) {
+						?>
+							<option value="<?=$type?>"><?=$type?></option>
+						<?php
+						}
+						?>
+					</select>
+				</div>
+				<div class="col-span-2">
 					<button type="submit" name="submit" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Employee</button>
 				</div>
 			</form>

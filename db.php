@@ -6,7 +6,9 @@
 
 $dbname = 'worc';
 try {
-	$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '');
+	$db = new PDO("mysql:host=localhost;dbname=$dbname", 'root', '', [
+		PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+	]);
 } catch(Exception $e) {
 	echo 'Could not connect to the database.';
 	die();

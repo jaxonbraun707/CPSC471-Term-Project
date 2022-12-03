@@ -56,7 +56,13 @@ include('../templates/top-bar.php');
 					}
 				?>
 				<div class="text-right">
-                    <a href="delete.php?id=<?=$employee_SSN?>" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Delete Employee</a>
+					<?php
+                    if(is_admin()) {
+                    ?>
+                    	<a href="delete.php?id=<?=$employee_SSN?>" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Delete Employee</a>
+                    <?php
+                	}
+                    ?>
                 </div>
 				<section class="flex">
 					<div class="w-2/5 mr-4">
@@ -80,7 +86,13 @@ include('../templates/top-bar.php');
                                 <dt class="text-xl">Postal/Zip Code: <?=$employee['Postal_Zip'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
-								<a href="../employees/edit.php?id=<?=$employee_SSN?>" class="hover:text-blue-500">Edit Employee</a>
+								<?php
+			                    if(is_admin()) {
+			                    ?>
+									<a href="../employees/edit.php?id=<?=$employee_SSN?>" class="hover:text-blue-500">Edit Employee</a>
+								<?php
+								}
+								?>
 							</div>
 						</div>
 				</section>

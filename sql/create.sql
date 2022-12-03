@@ -6,7 +6,7 @@
 
 CREATE TABLE `Design` (
   `Design_No` int(11) NOT NULL,
-  `Budget` decimal(19,4) NOT NULL
+  `Budget` decimal(19,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -215,7 +215,7 @@ CREATE TABLE Contract
 	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE );
 
 CREATE TABLE Client_Proposals
-	(Client_Id			INT			NOT NULL,
+	(Client_Id			INT			NOT NULL	AUTO_INCREMENT,
 	 Proposal_No		INT			NOT NULL,
 	 PRIMARY KEY (Client_Id, Proposal_No),
 	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -248,8 +248,8 @@ CREATE TABLE Part
 CREATE TABLE Vendor 
 (
 	Vendor_Id	INT	NOT NULL, 
-	Vendor_Name	VARCHAR(20)	NOT NULL, 
-	Phone_No	INT, 
+	Vendor_Name	VARCHAR(20)	NOT NULL,
+	Phone_No	BIGINT, 
 	PRIMARY KEY(Vendor_Id) 
 ); 
 
@@ -270,6 +270,9 @@ CREATE TABLE Employee
 	Job_Type	VARCHAR(255), 
 	PRIMARY KEY(SSN) 
 ); 
+
+ALTER TABLE `User`
+  ADD CONSTRAINT `fk_User_ESSN` FOREIGN KEY (`ESSN`) REFERENCES `Employee` (`SSN`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Sales_Have_Clients 
 (
@@ -292,6 +295,7 @@ CREATE TABLE Vendors_Provides_Parts
 (	
 	Vendor_Id	INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
+	Price	decimal(19,2)	NOT NULL,
 	PRIMARY KEY(Vendor_Id, Part_No),
 	FOREIGN KEY(Vendor_Id) REFERENCES Vendor(Vendor_Id), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 

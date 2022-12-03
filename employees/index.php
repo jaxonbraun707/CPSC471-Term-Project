@@ -1,5 +1,6 @@
 <?php
 require_once('../init.php');
+require_once('../login_functions.php');
 require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/employee.php');
@@ -43,7 +44,13 @@ include('../templates/top-bar.php');
 				?>
                 <h1 class="text-xl font-semibold">Employees</h1>
 				<div class="text-right">
-                    <a href="create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Employee</a>
+                    <?php
+                    if(is_admin()) {
+                    ?>
+                    	<a href="create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Employee</a>
+                    <?php
+                	}
+                    ?>
                 </div>
             </div>
             <form class="m-4" method="GET" action="index.php">
