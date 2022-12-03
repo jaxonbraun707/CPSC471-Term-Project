@@ -16,7 +16,7 @@ function get_employees_by_job($db, $job) {
 	return $query;
 }
 
-function add_employee($db, $SSN, $First_Name, $Last_Name, $DOB, $Phone_No, $Email, $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip, $Job_Type, $Sales_Region, $Eng_Specialty, $Lab_Specialty) {
+function add_employee($db, $SSN, $First_Name, $Last_Name, $DOB, $Phone_No, $Email, $Address_Line_1, $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip, $Job_Type, $Sales_Region, $Eng_Specialty, $Lab_Specialty, $username, $password, $user_type) {
 	$emp_q = "
 		INSERT INTO Employee
 		VALUES (:SSN, :First_Name, :Last_Name, :DOB, :Phone_No, :Email, :Address_Line_1, :Address_Line_2, :City, :Prov_State, :Country, :Postal_Zip, :Job_Type)
@@ -35,6 +35,11 @@ function add_employee($db, $SSN, $First_Name, $Last_Name, $DOB, $Phone_No, $Emai
 	$lab_q = "
 		INSERT INTO Lab_Specialties (Lab_SSN, Lab_Specialty)
 		VALUES (:SSN, :Lab_Specialty)
+	";
+
+	$user_q = "
+		INSERT INTO User (ESSN, Username, Password, User_Type)
+		VALUES (:SSN, :username, :password, :user_type);
 	";
 
 	if ($db->beginTransaction()) {
@@ -57,6 +62,14 @@ function add_employee($db, $SSN, $First_Name, $Last_Name, $DOB, $Phone_No, $Emai
 				$query = $db->prepare($lab_q);
 				$query->execute([':SSN' => $SSN, ':Lab_Specialty' => $Lab_Specialty]);
 			}
+
+			$query = $db->prepare($user_q);
+			$query->execute([
+				':SSN' => $SSN,
+				':username' => $username,
+				':password' => $password,
+				':user_type' => $user_type
+			]);
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {

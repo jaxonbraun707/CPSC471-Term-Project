@@ -12,3 +12,4 @@ if(is_logged_in())
 header("Location: " . BASE_URL . "/login");
 
 die();
+?>
