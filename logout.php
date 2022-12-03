@@ -9,5 +9,6 @@ require_once('login_functions.php');
 if(is_logged_in())
 	session_destroy();
 
-header("Location: /"+BASE_URL+"/login", TRUE, 200);
+header("Location:" . BASE_URL . "/login");
+
 die();

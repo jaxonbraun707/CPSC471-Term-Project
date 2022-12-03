@@ -33,6 +33,6 @@ update_design($db, $design_no, $budget, $new_design_no);
 
 // successfully redirect back to designs listing
 // return status code 200 as a sign that the post request was successful
-header("Location: design.php?id=$new_design_no", TRUE, 200);
+header("Location: design.php?id=$new_design_no");
 die();
 ?>

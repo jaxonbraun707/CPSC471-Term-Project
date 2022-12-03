@@ -6,7 +6,7 @@
 
 CREATE TABLE `Design` (
   `Design_No` int(11) NOT NULL,
-  `Budget` decimal(19,4) NOT NULL
+  `Budget` decimal(19,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -284,6 +284,7 @@ CREATE TABLE Vendors_Provides_Parts
 (	
 	Vendor_Id	INT	NOT NULL, 
 	Part_No	INT	NOT NULL, 
+	Price	decimal(19,2)	NOT NULL,
 	PRIMARY KEY(Vendor_Id, Part_No),
 	FOREIGN KEY(Vendor_Id) REFERENCES Vendor(Vendor_Id), 
 	FOREIGN KEY(Part_No) REFERENCES Part(Part_No) 

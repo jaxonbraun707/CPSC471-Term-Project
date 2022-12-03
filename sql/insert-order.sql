@@ -7,6 +7,7 @@ TRUNCATE Contract;
 TRUNCATE Design;
 TRUNCATE Project;
 TRUNCATE Orders;
+TRUNCATE User;
 
 
 -- An Order has parts and labour
@@ -56,6 +57,12 @@ VALUES(
 	2,
 	'Contractor'
 );
+
+INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES ('rupertraphael', 'password', 'Regular', 1);
+
+INSERT INTO User (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES ('jaxonbraun', 'password', 'Regular', 2);
 
 INSERT INTO Part(`Part_No`) VALUES(1);
 INSERT INTO Part(`Part_No`) VALUES(2);
@@ -148,16 +155,32 @@ VALUES(
     123456
 );
 
-INSERT INTO Vendors_Provides_Parts(`Vendor_Id`, `Part_No`)
+INSERT INTO Vendor(`Vendor_Id`, `Vendor_Name`, `Phone_No`)
 VALUES(
-    1,
-    1
+    2,
+    "General Parts",
+    654321
 );
 
-INSERT INTO Vendors_Provides_Parts(`Vendor_Id`, `Part_No`)
+INSERT INTO Vendors_Provides_Parts(`Vendor_Id`, `Part_No`, `Price`)
 VALUES(
     1,
-    2
+    1,
+    5.00
+);
+
+INSERT INTO Vendors_Provides_Parts(`Vendor_Id`, `Part_No`, `Price`)
+VALUES(
+    1,
+    2,
+    2.00
+);
+
+INSERT INTO Vendors_Provides_Parts(`Vendor_Id`, `Part_No`, `Price`)
+VALUES(
+    2,
+    3,
+    10.00
 );
 
 
