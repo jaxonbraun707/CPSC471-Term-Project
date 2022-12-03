@@ -38,6 +38,6 @@ add_user($db, $SSN, $username, $password, $user_type);
 
 // successfully redirect back to employee listing
 // return status code 200 as a sign that the post request was successful
-//header("Location: ../employees/index.php");
+header("Location: ../employees/index.php");
 die();
 ?>
