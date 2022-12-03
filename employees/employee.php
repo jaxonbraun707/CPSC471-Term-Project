@@ -80,7 +80,7 @@ include('../templates/top-bar.php');
                                 <dt class="text-xl">Postal/Zip Code: <?=$employee['Postal_Zip'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
-								<a href="../employees/edit.php?id=<?=$employee_SSN?>" class="hover:text-blue-500">Edit Employee</a>
+								<a href="edit.php?id=<?=$employee_SSN?>" class="hover:text-blue-500">Edit Employee</a>
 							</div>
 						</div>
 				</section>
