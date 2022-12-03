@@ -48,7 +48,7 @@ function update_proposal($db, $Proposal_No, $Title, $Value, $Issued_Date, $Expir
 	$q = "
 		UPDATE Proposal AS P, Sales_Proposals AS SP
 		SET P.Proposal_No = :Proposal_No, P.Title = :Title, P.Value = :Value, P.Issued_Date = :Issued_Date, P.Expiry_Date = :Expiry_Date, SP.Sales_SSN = :Sales_SSN 
-		WHERE P.Proposal_No = :Proposal_No AND SP.Proposal_No = :Proposal_No;
+		WHERE P.Proposal_No = :Proposal_No AND SP.Proposal_No = :Proposal_No
 	";
 	$query = $db->prepare($q);
 	$query->execute([':Proposal_No' => $Proposal_No, ':Title' => $Title, ':Value' => $Value, 'Issued_Date' => $Issued_Date, 'Expiry_Date' => $Expiry_Date, 'Sales_SSN' => $Sales_SSN]);

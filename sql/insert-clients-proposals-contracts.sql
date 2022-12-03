@@ -119,3 +119,14 @@ INSERT INTO contract (`Proposal_No`, `Contract_No`, `Start_Date`, `Delivery_Date
 
 INSERT INTO contract (`Proposal_No`, `Contract_No`, `Start_Date`, `Delivery_Date`, `Payment_Terms`, `Issued_Date`, `Expiry_Date`, `Client_Id`)
         VALUES (3, '2', '2023-04-15', '2023-09-04', '30/40/30/10', '2023-04-05', '2023-12-31', 4);
+
+-- Create Sales_Have_Clients
+
+INSERT INTO sales_have_clients (`Sales_SSN`, `Client_Id`)
+        VALUES (6, '3');
+
+INSERT INTO sales_have_clients (`Sales_SSN`, `Client_Id`)
+        VALUES (4, '2');
+
+INSERT INTO sales_have_clients (`Sales_SSN`, `Client_Id`)
+        VALUES (5, '1');
