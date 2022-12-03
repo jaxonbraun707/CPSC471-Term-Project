@@ -14,7 +14,7 @@ try {
 	$proposals = empty($search_term) ? get_proposals($db): search_proposals($db, $search_term);
 	$proposals = $proposals->fetchAll(PDO::FETCH_ASSOC);
 } catch(Exception $e) {
-	$clients = [];
+	$proposals = [];
 	$error = 'Failed to execute search query or fetch data.';
 } 
 

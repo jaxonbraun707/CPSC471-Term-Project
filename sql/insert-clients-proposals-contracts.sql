@@ -108,3 +108,14 @@ INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
 
 INSERT INTO client_proposals (`Client_Id`, `Proposal_No`)
         VALUES (1, 3);
+
+-- Create Contracts
+
+INSERT INTO contract (`Proposal_No`, `Contract_No`, `Start_Date`, `Delivery_Date`, `Payment_Terms`, `Issued_Date`, `Expiry_Date`, `Client_Id`)
+        VALUES (1, '1', '2022-10-30', '2023-03-15', '30/40/20/10', '2022-10-25', '2023-03-30', 3);
+
+INSERT INTO contract (`Proposal_No`, `Contract_No`, `Start_Date`, `Delivery_Date`, `Payment_Terms`, `Issued_Date`, `Expiry_Date`, `Client_Id`)
+        VALUES (2, '3', '2022-08-15', '2023-01-31', '30/40/20/10', '2022-08-10', '2023-03-31', 2);
+
+INSERT INTO contract (`Proposal_No`, `Contract_No`, `Start_Date`, `Delivery_Date`, `Payment_Terms`, `Issued_Date`, `Expiry_Date`, `Client_Id`)
+        VALUES (3, '2', '2023-04-15', '2023-09-04', '30/40/30/10', '2023-04-05', '2023-12-31', 4);

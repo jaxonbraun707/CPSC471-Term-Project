@@ -229,6 +229,7 @@ ALTER TABLE Client
 
 
 
+
 CREATE TABLE Orders
 (
 	Order_No	INT	NOT NULL,  
@@ -285,7 +286,7 @@ CREATE TABLE Sales_Proposals (
 	Proposal_No	INT	NOT NULL, 
 	PRIMARY KEY(Sales_SSN, Proposal_No),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
-	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ); 
+	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE); 
 
 CREATE TABLE Vendors_Provides_Parts 
 (	
