@@ -11,3 +11,14 @@ function is_logged_in() {
 
 	return !empty($username);
 }
+
+/**
+ * Checks if a user is an admin.
+ * Relies on the session being set with user role data.
+ * @return boolean
+ */
+function is_admin() {
+	$role = $_SESSION['user']['User_Type'] ?? '';
+
+	return !empty($role) && $role == user_types()['admin'];
+}

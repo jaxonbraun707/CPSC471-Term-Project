@@ -5,17 +5,7 @@
  */
 
 require_once('init.php');
-
-/**
- * Checks if a user is an admin.
- * Relies on the session being set with user role data.
- * @return boolean
- */
-function is_admin() {
-	$role = $_SESSION['user']['User_Type'] ?? '';
-
-	return !empty($role) && $role == user_types()['admin'];
-}
+require_once('login_functions.php');
 
 /**
  * only show unauthorized page if not admin otherwise
