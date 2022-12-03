@@ -44,7 +44,7 @@ include('../templates/top-bar.php');
 				?>
 				<h1 class="text-xl font-semibold">Designs</h1>
 				<div class="text-right">
-					<a href="/<?=BASE_URL?>/designs/create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
+					<a href="<?=BASE_URL?>/designs/create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Design</a>
 				</div>
 			</div>
 			<form class="m-4" method="GET" action="/<?=BASE_URL?>/designs/index.php">

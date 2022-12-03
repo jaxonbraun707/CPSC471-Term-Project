@@ -181,11 +181,11 @@ ALTER TABLE `Submittals_Attachments`
 
 CREATE TABLE Client
 	(Client_Id			INT			NOT NULL,
-	 Email			VARCHAR(255),
-	 Contact_Name		VARCHAR(255),
 	 Company_Name		VARCHAR(255),
+	 Contact_Name		VARCHAR(255)    NOT NULL,
+	 Email				VARCHAR(255),
+	 Phone_No			BIGINT,
 	 Website			VARCHAR(255),
-	 Phone_No			INT,
 	 Address_Line_1		VARCHAR(255)	NOT NULL,
 	 Address_Line_2		VARCHAR(255),
 	 City				VARCHAR(255)	NOT NULL,
@@ -195,10 +195,10 @@ CREATE TABLE Client
 	 PRIMARY KEY (Client_Id) );
 
 CREATE TABLE Proposal
-	(Proposal_No		INT			NOT NULL,
-	 Title			VARCHAR(255),
-	 Value			FLOAT,
-	 Issued_Date		DATE,
+	(Proposal_No		INT			    NOT NULL,
+	 Title			    VARCHAR(255)    NOT NULL,
+	 Value			    FLOAT           NOT NULL,
+	 Issued_Date		DATE            NOT NULL,
 	 Expiry_Date		DATE,
 	 PRIMARY KEY (Proposal_No) );
 
@@ -212,15 +212,22 @@ CREATE TABLE Contract
 	 Expiry_Date		DATE,
      Client_Id			INT NOT NULL,
 	 PRIMARY KEY (Proposal_No, Contract_No),
-	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) );
+	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE );
 
 CREATE TABLE Client_Proposals
 	(Client_Id			INT			NOT NULL,
 	 Proposal_No		INT			NOT NULL,
 	 PRIMARY KEY (Client_Id, Proposal_No),
-	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id),
-	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No)
+	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE,
+	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE
 	);
+
+-- AUTO_INCREMENT for table Client
+--
+ALTER TABLE Client
+  MODIFY Client_Id int(11) NOT NULL AUTO_INCREMENT;
+
+
 
 CREATE TABLE Orders
 (

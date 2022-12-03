@@ -23,7 +23,7 @@ include('../templates/top.php');
 			<input class="w-full p-2 rounded border" type="text" name="username" placeholder="Username">
 		</div>
 		<div class="mb-2">
-			<input class="w-full p-2 rounded border" type="text" name="password" placeholder="Password">
+			<input class="w-full p-2 rounded border" type="password" name="password" placeholder="Password">
 		</div>
 		<div class="text-right">
 			<input class="px-4 py-2 bg-blue-500 rounded text-blue-50 cursor-pointer hover:bg-blue-400" type="submit" name="submit" value="Log in">
