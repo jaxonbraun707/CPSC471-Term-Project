@@ -17,4 +17,21 @@ function find_user($db, $username, $password) {
 
 	return $query;
 }
+
+function add_user($db, $ssn, $username, $password, $user_type) {
+	$q = "
+		INSERT INTO User (ESSN, Username, Password, User_Type)
+		VALUES(:ssn, :username, :password, :user_type);
+	";
+
+	$query = $db->prepare($q);
+	$query->execute([
+		':ssn' => $ssn,
+		':username' => $username, 
+		':password' => $password,
+		':user_type' => $user_type
+	]);
+
+	return $query;
+}
 ?>
