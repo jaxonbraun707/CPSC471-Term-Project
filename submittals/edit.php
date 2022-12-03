@@ -3,6 +3,7 @@ require_once('../init.php');
 require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/submittal.php');
+require_once('../data/contract.php');
 
 $title = "Submittal | ";
 $error = NULL;
@@ -11,6 +12,7 @@ $submittal_no = $_GET['id'] ?? '';
 $submittal = find_submittal($db, $submittal_no);
 $authors = find_submittal_authors($db, $submittal_no);
 $attachments = find_submittal_attachments($db, $submittal_no);
+$contracts = get_contracts($db);
 // retrieve new_authors needed for the authors field.
 $new_authors = [];
 $new_authors = get_new_submittal_authors($db, $submittal_no, $_job_types['engineering']);
@@ -54,25 +56,45 @@ include('../templates/top-bar.php');
 				?>
 				<section class="flex">
 					<div class="w-2/5 mr-4">
-						<div class="mb-4 flex">
+						<form class="mb-4 flex" method="POST" action="<?=BASE_URL?>/submittals/update.php">
+							<input type="hidden" name="submittal_no" value="<?=$submittal['Submittal_No'] ?>">
 							<dl class="grow">
-								<dt class="font-bold text-2xl">Submittal No. <?=$submittal['Submittal_No'] ?></dt>
+								<dt class="font-bold text-2xl">
+									Submittal No. 
+									<input class="border w-16 pl-2" type="number" name="new_submittal_no" value="<?=$submittal['Submittal_No'] ?>">
+								</dt>
 								<dd class="text-xl">
 									Contract: 
-									<?php
-									if (!empty($submittal['Contract_No'])) {
-									?>
-										<a href="<?=BASE_URL . '/contracts/contract.php?id=' . $submittal['Contract_No']?>"><?=$submittal['Contract_No']?></a>
-									<?php
-									} else { echo '-'; }
-									?>
+									<select name="contract" class="border">
+										<?php
+										if(empty($submittal['contract'])) {
+										?>
+										<option selected value="">None</option>
+										<?php
+										} else {
+										?>
+										<option value="">None</option>
+										<?php
+										}
+										foreach ($contracts as $contract) {
+											$selected = !empty($submittal['Contract_No']) && $contract['Contract_No'] == $submittal['Contract_No'] ? 'selected' : null;
+										?>
+											<option <?=$selected?> value="<?=$contract['Contract_No']?>"><?=$contract['Contract_No']?></option>
+										<?php
+										}
+										?>
+									</select>
 										
 								</dd>
 							</dl>
 							<div class="text-right">
-								<a href="<?=BASE_URL?>/submittals/edit.php?id=<?=$submittal_no?>" class="hover:text-blue-500">Edit</a>
+								<button class="hover:text-blue-500" type="submit">Update</button>
 							</div>
-						</div>
+						</form>
+						<form method="POST" action="<?=BASE_URL?>/submittals/delete.php">
+							<input type="hidden" name="submittal_no" value="<?=$submittal['Submittal_No'] ?>">
+							<button class="hover:text-red-500" type="submit">Delete Submittal</button>
+						</form>
 
 						<table class="w-full" style="max-height: 500px;">
 							<thead>

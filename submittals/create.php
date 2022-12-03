@@ -53,6 +53,7 @@ include('../templates/top-bar.php');
 				<div class="mb-4">
 					<label for="contract">Select Contract:</label>
 					<select name="contract" id="contract" class="border">
+						<option selected value="">None</option>
 						<?php
 						foreach($contracts as $contract) {
 						?>

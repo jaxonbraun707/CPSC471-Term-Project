@@ -1,10 +1,5 @@
 <?php
 function add_submittal($db, $submittal_no, $contract, $authors) {
-	$submittal_q = "
-		INSERT INTO Submittal (Submittal_No, Contract_No)
-		VALUES (:submittal_no, :contract_no)
-	";
-
 	$author_q = "
 		INSERT INTO Engineering_Submittals (Eng_SSN, Submittal_No)
 		VALUES (:author, :submittal_no)
@@ -13,8 +8,21 @@ function add_submittal($db, $submittal_no, $contract, $authors) {
 	if ($db->beginTransaction()) {
 		try {
 			// insert submittal
-	    	$query = $db->prepare($submittal_q);
-			$query->execute([':submittal_no' => $submittal_no, ':contract_no' => null]);
+			if(empty($contract)) {
+				$submittal_q = "
+					INSERT INTO Submittal (Submittal_No, Contract_No)
+					VALUES (:submittal_no, NULL)
+				";
+	    		$query = $db->prepare($submittal_q);
+				$query->execute([':submittal_no' => $submittal_no]);
+			} else {
+				$submittal_q = "
+					INSERT INTO Submittal (Submittal_No, Contract_No)
+					VALUES (:submittal_no, :contract_no)
+				";
+				$query = $db->prepare($submittal_q);
+				$query->execute([':submittal_no' => $submittal_no, ':contract_no' => $contract]);
+			}
 
 			// associate submittals with authors
 			foreach($authors as $author) {
@@ -187,6 +195,38 @@ function search_submittals($db, $search_term) {
 	$query = $db->prepare($q);
 	$query->execute([':search_term' => "%$search_term%"]);
 
+	return $query;
+}
+
+function update_submittal($db, $submittal_no, $contract, $new_submittal_no) {
+	if(empty($contract)) {
+		$q = "
+			UPDATE Submittal
+			SET Submittal_No = :new_submittal_no, Contract_No = NULL
+			WHERE Submittal_No = :submittal_no;
+		";
+
+		$query = $db->prepare($q);
+		$query->execute([':submittal_no' => $submittal_no, ':new_submittal_no' => $new_submittal_no]);
+	} else {
+		$q = "
+			UPDATE Submittal
+			SET Submittal_No = :new_submittal_no, Contract_No = :contract
+			WHERE Submittal_No = :submittal_no;
+		";
+
+		$query = $db->prepare($q);
+		$query->execute([':submittal_no' => $submittal_no, ':contract' => $contract, ':new_submittal_no' => $new_submittal_no]);
+	}
+	return $query;
+}
+
+function delete_submittal($db, $submittal_no) {
+	$q = "
+		DELETE FROM Submittal WHERE Submittal_No = :submittal_no
+	";
+	$query = $db->prepare($q);
+	$query->execute(['submittal_no' => $submittal_no]);
 	return $query;
 }
 ?>
