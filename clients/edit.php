@@ -43,10 +43,6 @@ include('../templates/top-bar.php');
 						<form class="mb-4 flex" method="POST" action="../clients/update.php">
 							<input type="hidden" name="Client_Id" value="<?=$client['Client_Id'] ?>">
 							<dl class="grow">
-								<dt class="font-bold text-2xl">
-									Client Id
-									<input class="border w-64 pl-2" type="number" name="New_Client_Id" value="<?=$client['Client_Id']?>">
-								</dt>
 								<dt class="text-xl">
                                     Company Name
 									<input class="border w-64 pl-2" type="text" name="Company_Name" value="<?=$client['Company_Name']?>">

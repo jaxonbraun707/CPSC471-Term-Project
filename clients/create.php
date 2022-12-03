@@ -34,9 +34,6 @@ include('../templates/top-bar.php');
 
 			<form class="m-4" method="POST" action="../clients/post.php">
 				<div class="mb-4">
-					<input type="number" name="Client_Id" class="border px-2 rounded" placeholder="Enter Client_Id">
-				</div>
-				<div class="mb-4">
 					<input type="text" name="Email" class="border px-2 rounded w-64" placeholder="Enter Email Address">
 				</div>
                 <div class="mb-4">
