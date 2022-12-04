@@ -183,7 +183,7 @@ ALTER TABLE `Submittals_Attachments`
   ADD CONSTRAINT `fk_Submittals_Attachments_Submittal_No` FOREIGN KEY (`Submittal_No`) REFERENCES `Submittal` (`Submittal_No`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 CREATE TABLE Client
-	(Client_Id			INT			NOT NULL,
+	(Client_Id			INT			NOT NULL AUTO_INCREMENT,
 	 Company_Name		VARCHAR(255),
 	 Contact_Name		VARCHAR(255)    NOT NULL,
 	 Email				VARCHAR(255),
@@ -224,11 +224,6 @@ CREATE TABLE Client_Proposals
 	 FOREIGN KEY (Client_Id) REFERENCES Client (Client_Id) ON DELETE CASCADE ON UPDATE CASCADE,
 	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE
 	);
-
--- AUTO_INCREMENT for table Client
---
-ALTER TABLE Client
-  MODIFY Client_Id int(11) NOT NULL AUTO_INCREMENT;
 
 
 
