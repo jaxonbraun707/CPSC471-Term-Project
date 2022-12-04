@@ -47,11 +47,12 @@ include('../templates/top-bar.php');
 							<dl class="grow">
 								<dt class="font-bold text-2xl"><?=$proposal['Title'] ?? '' ?></dt>
 								
-                                <dt class="text-xl">Proposal_No: <?=$proposal['Proposal_No'] ?? ''?></dt>
-                                <dt class="text-xl">Value: <?=$proposal['Value'] ?? ''?></dt>
+                                <dt class="text-xl">Proposal No: <?=$proposal['Proposal_No'] ?? ''?></dt>
+                                <dt class="text-xl">Client: <?=$proposal['Company_Name'] ?? ''?></dt>
+								<dt class="text-xl">Value: $<?=$proposal['Value'] ?? ''?></dt>
                                 <dt class="text-xl">Issued Date: <?=$proposal['Issued_Date'] ?? ''?></dt>
                                 <dt class="text-xl">Expiry Date: <?=$proposal['Expiry_Date'] ?? ''?></dt>
-								<dt class="text-xl">Sales SSN: <?=$proposal['Sales_SSN'] ?? ''?></dt>
+								<dt class="text-xl">Sales Person: <?=$proposal['First_Name'] ?? ''?> <?=$proposal['Last_Name'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
 								<a href="../proposals/edit.php?id=<?=$Proposal_No?>" class="hover:text-blue-500">Edit Proposal</a>

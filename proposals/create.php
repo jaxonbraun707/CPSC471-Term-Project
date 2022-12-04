@@ -3,6 +3,7 @@ require_once('../init.php');
 require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/proposal.php');
+require_once('../data/client.php');
 require_once('../data/employee.php');
 
 $title = 'Add a Proposal';
@@ -12,6 +13,11 @@ $error = get_error_in_session();
 $employees = [];
 $employees = get_employees_by_job($db, $_job_types['sales']);
 $employees = $employees->fetchAll(PDO::FETCH_ASSOC);
+
+// retrieve clients needed for the clients field.
+$clients = [];
+$clients = get_clients($db);
+$clients = $clients->fetchAll(PDO::FETCH_ASSOC);
 
 include('../templates/top.php');
 ?>
@@ -56,8 +62,18 @@ include('../templates/top-bar.php');
 						}
 						?>
 					</select>
+				</div>
 				<div class="mb-4">
-					<input type="number" name="Client_Id" class="border px-2 rounded w-64" placeholder="Enter Client ID">
+					<label for="client">Select Client:</label>
+					<select name="client" id="client" multiple class="border align-top">
+						<?php
+						foreach($clients as $client) {
+						?>
+							<option value="<?=$client['Client_Id']?>"> <?=$client['Company_Name']?></option>
+						<?php
+						}
+						?>
+					</select>
 				</div>
                 <div class="mb-4">
 				<dt class="text-base">$ <input type="number" name="Value" class="border px-2 rounded w-64" placeholder="Enter Value">
