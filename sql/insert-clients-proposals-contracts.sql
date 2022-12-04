@@ -53,6 +53,14 @@ VALUES(
 	'Sales'
 ); 
 
+INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES(
+	'joetuff',
+	'password',
+	'Regular',
+	'4' 
+); 
+
 INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
 VALUES(
 	5,
@@ -70,6 +78,14 @@ VALUES(
 	'Sales'
 ); 
 
+INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES(
+	'sarahsteward',
+	'password',
+	'Regular',
+	'5' 
+); 
+
 INSERT INTO EMPLOYEE (`SSN`, `First_Name`, `Last_Name`, `DOB`, `Phone_No`, `Email`, `Address_Line_1`, `Address_Line_2`, `City`, `Prov_State`, `Country`, `Postal_Zip`, `Job_Type`)
 VALUES(
 	6,
@@ -85,6 +101,14 @@ VALUES(
 	'Canada',
 	'Postal', 
 	'Sales'
+); 
+
+INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
+VALUES(
+	'jameswong',
+	'password',
+	'Regular',
+	'6' 
 ); 
 
 -- Create Sales_Proposals

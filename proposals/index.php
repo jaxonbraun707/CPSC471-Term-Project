@@ -60,7 +60,8 @@ include('../templates/top-bar.php');
 					<section>
 						<dl class="p-2">
 							<dt class="font-bold"><?=$proposal['Title'] ?></dt>
-							<dt class="font-bold"><?=$proposal['Value'] ?></dt>
+							<dt class="font-bold">$ <?=$proposal['Value'] ?></dt>
+							<dt class="font-bold">Issued Date:</dt>
 							<dt class="font-bold"><?=$proposal['Issued_Date'] ?></dt>
 						</dl>
 					</section>

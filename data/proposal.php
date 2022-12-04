@@ -62,7 +62,7 @@ function update_proposal($db, $Proposal_No, $Title, $Value, $Issued_Date, $Expir
  * @param  $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id, $Issued_Date, $Expiry_Date 
  * 
  **********************/
-function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id, $Issued_Date, $Expiry_Date) {
+function add_proposal($db, $salesperson, $Proposal_No, $Title, $Value, $Client_Id, $Issued_Date, $Expiry_Date) {
 	$proposal_q = "
 		INSERT INTO proposal (Proposal_No, Title, Value, Issued_Date, Expiry_Date)
 		VALUES (:Proposal_No, :Title, :Value, :Issued_Date, :Expiry_Date)
@@ -70,7 +70,7 @@ function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id,
 
 	$sales_q = "
 		INSERT INTO sales_proposals (Sales_SSN, Proposal_No)
-		VALUES (:Sales_SSN, :Proposal_No)
+		VALUES (:salesperson, :Proposal_No)
 	";
 
 	$client_q = "
@@ -86,7 +86,7 @@ function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id,
 
 			// insert associated sales_ssn
 			$query = $db->prepare($sales_q);
-			$query->execute([':Sales_SSN' => $Sales_SSN, ':Proposal_No' => $Proposal_No]);
+			$query->execute([':salesperson' => $salesperson, ':Proposal_No' => $Proposal_No]);
 
 			// insert associated client_id
 			$query = $db->prepare($client_q);

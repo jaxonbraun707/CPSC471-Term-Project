@@ -3,9 +3,15 @@ require_once('../init.php');
 require_once('../must_be_logged_in.php');
 require_once('../db.php');
 require_once('../data/proposal.php');
+require_once('../data/employee.php');
 
 $title = 'Add a Proposal';
 $error = get_error_in_session();
+
+// retrieve employees needed for the employees field.
+$employees = [];
+$employees = get_employees_by_job($db, $_job_types['sales']);
+$employees = $employees->fetchAll(PDO::FETCH_ASSOC);
 
 include('../templates/top.php');
 ?>
@@ -34,23 +40,33 @@ include('../templates/top-bar.php');
             
 			<form class="m-4" method="POST" action="../proposals/post.php">
                 <div class="mb-4">
-					<input type="number" name="Sales_SSN" class="border px-2 rounded w-64" placeholder="Enter Sales SSN">
-				</div>
-                <div class="mb-4">
 					<input type="number" name="Proposal_No" class="border px-2 rounded w-64" placeholder="Enter Proposal Number">
 				</div>
                 <div class="mb-4">
 					<input type="text" name="Title" class="border px-2 rounded w-64" placeholder="Enter Proposal Title">
 				</div>
-                <div class="mb-4">
-					<input type="number" name="Value" class="border px-2 rounded w-64" placeholder="Enter Value">
-				</div>
-                <div class="mb-4">
+				<div class="mb-4">
+					<label for="salesperson">Select Sales Person:</label>
+					<select name="salesperson" id="salesperson" multiple class="border align-top">
+						<?php
+						foreach($employees as $employee) {
+						?>
+							<option value="<?=$employee['SSN']?>"> <?=$employee['First_Name']?> <?=$employee['Last_Name']?></option>
+						<?php
+						}
+						?>
+					</select>
+				<div class="mb-4">
 					<input type="number" name="Client_Id" class="border px-2 rounded w-64" placeholder="Enter Client ID">
 				</div>
                 <div class="mb-4">
+				<dt class="text-base">$ <input type="number" name="Value" class="border px-2 rounded w-64" placeholder="Enter Value">
+				</div>
+				<dt class="text-base">Issue Date:</dt>
+                <div class="mb-4">
 					<input type="date" name="Issued_Date" class="border px-2 rounded w-64" placeholder="Enter Issue Date yyyy-mm-dd">
 				</div>
+				<dt class="text-base">Expiry Date:</dt>
                 <div class="mb-4">
 					<input type="date" name="Expiry_Date" class="border px-2 rounded w-64" placeholder="Enter Expiry Date yyyy-mm-dd">
 				</div>
