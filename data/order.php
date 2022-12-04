@@ -63,6 +63,37 @@ function find_order_parts($db, $order_no){
 	return $query;
 }
 
+function find_order_parts_with_average_price($db, $order_no){
+	$q = "
+		SELECT 
+			Parts_Inventory.*, AVG(Vendors_Provides_Parts.Price) as Average_Price, Parts_Inventory.Qty * AVG(Vendors_Provides_Parts.Price) as Estimate_Subtotal 
+				FROM Orders, Part, Parts_Inventory, Vendors_Provides_Parts
+				WHERE
+					Orders.Order_No = 1 AND
+					Orders.Order_No = Parts_Inventory.Order_No AND
+					Parts_Inventory.Part_No = Part.Part_No AND
+					Part.Part_No = Vendors_Provides_Parts.Part_No
+		GROUP BY Parts_Inventory.Part_No;
+		";
+	$query = $db->prepare($q);
+	$query->execute([':order_no' => $order_no]);
+	return $query;
+}
+
+function find_order_aggregate_stats($db, $order_no)
+{
+	$q = "
+		SELECT
+			Order_No, SUM(Hours) as Total_Hours, AVG(Hours) as Average_Hours, COUNT(Labour_SSN) as Num_Labour
+		FROM Labour_Order
+			WHERE Order_No = :order_no
+		GROUP BY Order_No;
+	";
+	$query = $db->prepare($q);
+	$query->execute([':order_no' => $order_no]);
+	return $query;
+}
+
 function get_new_order_labours($db, $order_no, $job) {
 	$q = "
 		SELECT Employee.*
@@ -82,7 +113,7 @@ function get_new_order_labours($db, $order_no, $job) {
 function add_order($db, $order_no, $project_no, $ship_date, $labours, $labour_date, $labour_hours){
 	$order_q = "
 		INSERT INTO Orders (Order_No, Ship_Date, Project_No)
-		VALUES(:order_no, :ship_date, project_no)
+		VALUES(:order_no, :ship_date, :project_no)
 	";
 	$labour_q = "
 		INSERT INTO Labour_Order (Labour_SSN, Order_No, Start_Date, Hours)

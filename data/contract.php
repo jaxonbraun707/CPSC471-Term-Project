@@ -1,5 +1,4 @@
 <?php
-
 /**********************
  * 
  * query for retrieving all contracts

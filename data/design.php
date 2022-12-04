@@ -71,11 +71,10 @@ function get_designs($db) {
 	$q = "
 		SELECT  
 			Design.*
-		FROM Design, Engineering_Designs, Employee, User
+		FROM Design, Engineering_Designs, Employee
 		WHERE
 			Design.Design_No = Engineering_Designs.Design_No AND
-			Engineering_Designs.Eng_SSN = Employee.SSN AND
-			Employee.SSN = User.ESSN
+			Engineering_Designs.Eng_SSN = Employee.SSN
 		GROUP BY Design_No
 		";
 	return $db->query($q);
@@ -191,16 +190,14 @@ function search_designs($db, $search_term) {
 	$q = "
 		SELECT  
 			Design.*
-		FROM Design, Engineering_Designs, Employee, User
+		FROM Design, Engineering_Designs, Employee
 		WHERE
 			Design.Design_No = Engineering_Designs.Design_No AND
 			Engineering_Designs.Eng_SSN = Employee.SSN AND
-			Employee.SSN = User.ESSN AND
 			(
 				Design.Design_No LIKE :search_term OR
 				Employee.First_Name LIKE :search_term OR
-				Employee.Last_Name LIKE :search_term OR
-				User.username LIKE :search_term
+				Employee.Last_Name LIKE :search_term
 			)
 		GROUP BY Design_No
 	";

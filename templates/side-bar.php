@@ -5,7 +5,9 @@
 		</li>
 		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/proposals/">Proposals</a></li>
 		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/contracts/">Contracts</a></li>
-		<li class="py-2 px-4">Projects</li>
+		<li class="py-2 px-4">
+			<a href="<?=BASE_URL?>/projects/" class="hover:text-blue-500">Projects</a>
+		</li>
 		<li class="py-2 px-4">
 			<a href="<?=BASE_URL?>/order/" class="hover:text-blue-500">Orders</a>
 		</li>

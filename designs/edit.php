@@ -54,7 +54,7 @@ include('../templates/top-bar.php');
 				?>
 				<section class="flex">
 					<div class="w-2/5 mr-4">
-						<form class="mb-4 flex" method="POST" action="/<?=BASE_URL?>/designs/update.php">
+						<form class="mb-4 flex" method="POST" action="<?=BASE_URL?>/designs/update.php">
 							<input type="hidden" name="design_no" value="<?=$design['Design_No'] ?>">
 							<dl class="grow">
 								<dt class="font-bold text-2xl">
@@ -70,7 +70,7 @@ include('../templates/top-bar.php');
 								<button class="hover:text-blue-500" type="submit">Update</button>
 							</div>
 						</form>
-						<form method="POST" action="/<?=BASE_URL?>/designs/delete.php">
+						<form method="POST" action="<?=BASE_URL?>/designs/delete.php">
 							<input type="hidden" name="design_no" value="<?=$design['Design_No'] ?>">
 							<button class="hover:text-red-500" type="submit">Delete Design</button>
 						</form>

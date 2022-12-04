@@ -60,7 +60,7 @@ include('../templates/top-bar.php');
 								<dd class="text-xl"><?=number_format($design['Budget'], 2).' CAD' ?></dd>
 							</dl>
 							<div class="text-right">
-								<a href="/<?=BASE_URL?>/designs/edit.php?id=<?=$design_no?>" class="hover:text-blue-500">Edit</a>
+								<a href="<?=BASE_URL?>/designs/edit.php?id=<?=$design_no?>" class="hover:text-blue-500">Edit</a>
 							</div>
 						</div>
 
