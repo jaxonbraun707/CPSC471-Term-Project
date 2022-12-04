@@ -73,12 +73,12 @@ include('../templates/top-bar.php');
 								<dl class="grid grid-cols-2 grid-rows-2 gap-4">
 									<div>
 										<dt class="font-semibold">Start Date</dt>
-										<dd><?=date_format(date_create($project['Start_Date']), "F m, Y")?></dd>
+										<dd><?=date_format(date_create($project['Start_Date']), "F d, Y")?></dd>
 									</div>
 
 									<div>
 										<dt class="font-semibold">End Date</dt>
-										<dd><?=date_format(date_create($project['End_Date']), "F m, Y")?></dd>
+										<dd><?=date_format(date_create($project['End_Date']), "F d, Y")?></dd>
 									</div>
 
 									<div>
