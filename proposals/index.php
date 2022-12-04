@@ -14,7 +14,7 @@ try {
 	$proposals = empty($search_term) ? get_proposals($db): search_proposals($db, $search_term);
 	$proposals = $proposals->fetchAll(PDO::FETCH_ASSOC);
 } catch(Exception $e) {
-	$clients = [];
+	$proposals = [];
 	$error = 'Failed to execute search query or fetch data.';
 } 
 
@@ -60,7 +60,8 @@ include('../templates/top-bar.php');
 					<section>
 						<dl class="p-2">
 							<dt class="font-bold"><?=$proposal['Title'] ?></dt>
-							<dt class="font-bold"><?=$proposal['Value'] ?></dt>
+							<dt class="font-bold">$ <?=$proposal['Value'] ?></dt>
+							<dt class="font-bold">Issued Date:</dt>
 							<dt class="font-bold"><?=$proposal['Issued_Date'] ?></dt>
 						</dl>
 					</section>

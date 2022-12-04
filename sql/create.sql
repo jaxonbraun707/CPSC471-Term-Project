@@ -225,6 +225,14 @@ CREATE TABLE Client_Proposals
 	 FOREIGN KEY (Proposal_No) REFERENCES Proposal (Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE
 	);
 
+-- AUTO_INCREMENT for table Client
+--
+ALTER TABLE Client
+  MODIFY Client_Id int(11) NOT NULL AUTO_INCREMENT;
+
+
+
+
 CREATE TABLE Orders
 (
 	Order_No	INT	NOT NULL,  
@@ -243,7 +251,7 @@ CREATE TABLE Part
 CREATE TABLE Vendor 
 (
 	Vendor_Id	INT	NOT NULL, 
-	Vendor_Name	VARCHAR(20)	NOT NULL, 
+	Vendor_Name	VARCHAR(20)	NOT NULL,
 	Phone_No	BIGINT, 
 	PRIMARY KEY(Vendor_Id) 
 ); 
@@ -284,7 +292,7 @@ CREATE TABLE Sales_Proposals (
 	Proposal_No	INT	NOT NULL, 
 	PRIMARY KEY(Sales_SSN, Proposal_No),
 	FOREIGN KEY(Sales_SSN) REFERENCES Employee(SSN), 
-	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ); 
+	FOREIGN KEY(Proposal_No) REFERENCES Proposal(Proposal_No) ON DELETE CASCADE ON UPDATE CASCADE); 
 
 CREATE TABLE Vendors_Provides_Parts 
 (	

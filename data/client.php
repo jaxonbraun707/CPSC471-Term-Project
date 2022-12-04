@@ -17,6 +17,25 @@ function get_clients($db) {
 
 /**********************
  * 
+ * query for retrieving the Client_Id from the Proposal_No
+ * @param  PDO $db, $Proposal_No
+ * @return $query     query object
+ * 
+ **********************/
+function get_clientId($db, $proposal) {	
+	$q = "
+		SELECT  Client_Id
+		FROM Client_Proposals
+		WHERE Proposal_No = :proposal
+		";
+		$query = $db->prepare($q);
+		$query->execute([':proposal' => $proposal]);
+	  
+		return $query;
+}
+
+/**********************
+ * 
  * query for searching clients by company name, contact name, or prov_state
  * @param  PDO $db
  * @return $query     query object
@@ -58,7 +77,7 @@ function add_client($db, $Email, $Contact_Name, $Company_Name, $Website, $Phone_
 		try {
 			// insert client
 			$query = $db->prepare($client_q);
-			$query->execute(['Email' => $Email, ':Contact_Name' => $Contact_Name, ':Company_Name' => $Company_Name, ':Website' => $Website, ':Phone_No' => $Phone_No, ':Address_Line_1' => $Address_Line_1, ':Address_Line_2' => $Address_Line_2, ':City' => $City, ':Prov_State' => $Prov_State, ':Country' => $Country, ':Postal_Zip' => $Postal_Zip]);
+			$query->execute([':Email' => $Email, ':Contact_Name' => $Contact_Name, ':Company_Name' => $Company_Name, ':Website' => $Website, ':Phone_No' => $Phone_No, ':Address_Line_1' => $Address_Line_1, ':Address_Line_2' => $Address_Line_2, ':City' => $City, ':Prov_State' => $Prov_State, ':Country' => $Country, ':Postal_Zip' => $Postal_Zip]);
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {
@@ -111,7 +130,8 @@ function delete_client($db, $Client_Id){
  * 
  * Update a client by Client_Id
  * @param  PDO $db
- * @param  string $Client_Id
+ * @param  $Client_Id, $Email, $Contact_Name, $Company_Name, $Website, $Phone_No, $Address_Line_1, 
+ * $Address_Line_2, $City, $Prov_State, $Country, $Postal_Zip
  * @return PDO query object
  * 
  **********************/

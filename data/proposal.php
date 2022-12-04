@@ -25,12 +25,16 @@ function get_proposals($db) {
 function find_proposal($db, $proposal_no) {
 	$q = "
 		SELECT  
-			P.*, SP.Sales_SSN
-		FROM Proposal AS P, Sales_Proposals AS SP
+			P.*, C.Company_Name, E.First_Name, E.Last_Name
+		FROM Proposal AS P, Client AS C, Client_Proposals AS CP, Sales_Proposals AS SP, Employee AS E
 		WHERE
 			P.Proposal_No = :proposal_no AND
-			SP.Proposal_No = :proposal_no
+			SP.Proposal_No = :proposal_no AND
+			CP.Proposal_No = :proposal_no AND
+			CP.Client_Id = C.Client_Id AND
+			SP.Sales_SSN = E.SSN
 		";
+
 	$query = $db->prepare($q);
 	$query->execute([':proposal_no' => $proposal_no]);
 	return $query;
@@ -44,14 +48,14 @@ function find_proposal($db, $proposal_no) {
  * @return PDO query object
  * 
  **********************/
-function update_proposal($db, $Proposal_No, $Title, $Value, $Issued_Date, $Expiry_Date, $Sales_SSN) {
+function update_proposal($db, $Proposal_No, $Title, $Value, $Issued_Date, $Expiry_Date, $salesperson) {
 	$q = "
 		UPDATE Proposal AS P, Sales_Proposals AS SP
-		SET P.Proposal_No = :Proposal_No, P.Title = :Title, P.Value = :Value, P.Issued_Date = :Issued_Date, P.Expiry_Date = :Expiry_Date, SP.Sales_SSN = :Sales_SSN 
-		WHERE P.Proposal_No = :Proposal_No AND SP.Proposal_No = :Proposal_No;
+		SET P.Proposal_No = :Proposal_No, P.Title = :Title, P.Value = :Value, P.Issued_Date = :Issued_Date, P.Expiry_Date = :Expiry_Date, SP.Sales_SSN = :salesperson 
+		WHERE P.Proposal_No = :Proposal_No AND SP.Proposal_No = :Proposal_No
 	";
 	$query = $db->prepare($q);
-	$query->execute([':Proposal_No' => $Proposal_No, ':Title' => $Title, ':Value' => $Value, 'Issued_Date' => $Issued_Date, 'Expiry_Date' => $Expiry_Date, 'Sales_SSN' => $Sales_SSN]);
+	$query->execute([':Proposal_No' => $Proposal_No, ':Title' => $Title, ':Value' => $Value, 'Issued_Date' => $Issued_Date, 'Expiry_Date' => $Expiry_Date, 'salesperson' => $salesperson]);
 	return $query;
 }
 
@@ -62,7 +66,7 @@ function update_proposal($db, $Proposal_No, $Title, $Value, $Issued_Date, $Expir
  * @param  $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id, $Issued_Date, $Expiry_Date 
  * 
  **********************/
-function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id, $Issued_Date, $Expiry_Date) {
+function add_proposal($db, $salesperson, $Proposal_No, $Title, $Value, $client, $Issued_Date, $Expiry_Date) {
 	$proposal_q = "
 		INSERT INTO proposal (Proposal_No, Title, Value, Issued_Date, Expiry_Date)
 		VALUES (:Proposal_No, :Title, :Value, :Issued_Date, :Expiry_Date)
@@ -70,12 +74,12 @@ function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id,
 
 	$sales_q = "
 		INSERT INTO sales_proposals (Sales_SSN, Proposal_No)
-		VALUES (:Sales_SSN, :Proposal_No)
+		VALUES (:salesperson, :Proposal_No)
 	";
 
 	$client_q = "
 		INSERT INTO client_proposals (Client_Id, Proposal_No)
-		VALUES (:Client_Id, :Proposal_No)
+		VALUES (:client, :Proposal_No)
 	";
 
 	if ($db->beginTransaction()) {
@@ -86,11 +90,11 @@ function add_proposal($db, $Sales_SSN, $Proposal_No, $Title, $Value, $Client_Id,
 
 			// insert associated sales_ssn
 			$query = $db->prepare($sales_q);
-			$query->execute([':Sales_SSN' => $Sales_SSN, ':Proposal_No' => $Proposal_No]);
+			$query->execute([':salesperson' => $salesperson, ':Proposal_No' => $Proposal_No]);
 
 			// insert associated client_id
 			$query = $db->prepare($client_q);
-			$query->execute([':Client_Id' => $Client_Id, ':Proposal_No' => $Proposal_No]);
+			$query->execute([':client' => $client, ':Proposal_No' => $Proposal_No]);
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {
