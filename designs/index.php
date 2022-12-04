@@ -56,7 +56,7 @@ include('../templates/top-bar.php');
 			<?php
 			foreach($designs as $design) {
 			?>
-				<a href="/<?=BASE_URL?>/designs/design.php?id=<?=$design['Design_No']?>" class="border rounded hover:border-blue-500">
+				<a href="<?=BASE_URL?>/designs/design.php?id=<?=$design['Design_No']?>" class="border rounded hover:border-blue-500">
 					<section>
 						<div class="text-center bg-gray-100 h-32">
 							<img src="#" alt="Design Image Placeholder">						
