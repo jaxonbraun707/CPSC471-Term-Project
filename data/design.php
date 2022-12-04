@@ -7,7 +7,6 @@
  * @param int $budget    
  * @param array $authors   SSNs of authors
  *
- * TODO: include drawings.
  */
 function add_design($db, $design_no, $budget, $authors, $drawings) {
 	$design_q = "

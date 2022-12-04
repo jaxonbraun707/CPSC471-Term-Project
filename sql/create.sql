@@ -75,7 +75,8 @@ CREATE TABLE `Submittal` (
 
 CREATE TABLE `Submittals_Attachments` (
   `Submittal_No` int(11) NOT NULL,
-  `Attachment` longblob NOT NULL
+  `Attachment_No` int(11) NOT NULL,
+  `Filename` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -137,7 +138,9 @@ ALTER TABLE `Submittal`
 -- Indexes for table `Submittals_Attachments`
 --
 ALTER TABLE `Submittals_Attachments`
-  ADD KEY `fk_Submittals_Attachments_Submittal_No` (`Submittal_No`);
+  ADD KEY `fk_Submittals_Attachments_Submittal_No` (`Submittal_No`),
+  ADD PRIMARY KEY(`Attachment_No`),
+  MODIFY `Attachment_No` int(11) NOT NULL AUTO_INCREMENT;;
 
 --
 -- Indexes for table `User`
