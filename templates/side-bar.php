@@ -14,8 +14,12 @@
 		</li>
 		<li class="py-2 px-4">
 			<a href="<?=BASE_URL?>/vendor/" class="hover:text-blue-500">Vendors</a>
-
+		</li>
+		<li class="py-2 px-4">
 			<a href="<?=BASE_URL ?>/designs/" class="hover:text-blue-500">Designs</a>
+		</li>
+		<li class="py-2 px-4">
+			<a href="<?=BASE_URL ?>/submittals/" class="hover:text-blue-500">Submittals</a>
 		</li>
 		<li class="py-2 px-4">
 			<a href="<?=BASE_URL ?>/employees/" class="hover:text-blue-500">Employees</a>
