@@ -11,7 +11,7 @@ $parts = $_POST['part'] ?? [];
 $price = $_POST['price'] ?? '';
 
 // redirect back to create form if either value is empty.
-if(empty($vendor_id) || empty($parts) || empty($price)) {
+if(empty($vendor_id)) {
 	$error = 'All fields are required.';
 	$_SESSION['error'] = $error;
 	header("Location: create.php");
