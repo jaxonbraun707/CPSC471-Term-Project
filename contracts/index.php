@@ -60,8 +60,11 @@ include('../templates/top-bar.php');
 					<section>
 						<dl class="p-2">
 							<dt class="font-bold"><?=$contract['Title'] ?></dt>
+							<dt class="font-bold">Contract No:</dt>
 							<dt class="font-bold"><?=$contract['Contract_No'] ?></dt>
+							<dt class="font-bold">Start Date:</dt>
 							<dt class="font-bold"><?=$contract['Start_Date'] ?></dt>
+							<dt class="font-bold">Delivery Date:</dt>
 							<dt class="font-bold"><?=$contract['Delivery_Date'] ?></dt>
 						</dl>
 					</section>

@@ -17,6 +17,25 @@ function get_clients($db) {
 
 /**********************
  * 
+ * query for retrieving the Client_Id from the Proposal_No
+ * @param  PDO $db, $Proposal_No
+ * @return $query     query object
+ * 
+ **********************/
+function get_clientId($db, $proposal) {	
+	$q = "
+		SELECT  Client_Id
+		FROM Client_Proposals
+		WHERE Proposal_No = :proposal
+		";
+		$query = $db->prepare($q);
+		$query->execute([':proposal' => $proposal]);
+	  
+		return $query;
+}
+
+/**********************
+ * 
  * query for searching clients by company name, contact name, or prov_state
  * @param  PDO $db
  * @return $query     query object

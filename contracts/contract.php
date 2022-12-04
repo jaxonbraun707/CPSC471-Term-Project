@@ -47,12 +47,13 @@ include('../templates/top-bar.php');
 							<dl class="grow">
 								<dt class="font-bold text-2xl"><?=$contract['Title'] ?? '' ?></dt>
 								<dt class="text-xl">Contract Number: <?=$contract['Contract_No'] ?? ''?></dt>
-                                <dt class="text-xl">Proposal_No: <?=$contract['Proposal_No'] ?? ''?></dt>
+                                <dt class="text-xl">Proposal No: <?=$contract['Proposal_No'] ?? ''?></dt>
+								<dt class="text-xl">Client: <?=$contract['Company_Name'] ?? ''?></dt>
                                 <dt class="text-xl">Start Date: <?=$contract['Start_Date'] ?? ''?></dt>
                                 <dt class="text-xl">Delivery Date: <?=$contract['Delivery_Date'] ?? ''?></dt>
                                 <dt class="text-xl">Payment_Terms: <?=$contract['Payment_Terms'] ?? ''?></dt>
-                                <dt class="text-xl">Expiry_Date: <?=$contract['Expiry_Date'] ?? ''?></dt>
-                                <dt class="text-xl">Client Id: <?=$contract['Client_Id'] ?? ''?></dt>
+								<dt class="text-xl">Issued Date: <?=$contract['Issued_Date'] ?? ''?></dt>
+                                <dt class="text-xl">Expiry Date: <?=$contract['Expiry_Date'] ?? ''?></dt>
 							</dl>
 							<div class="text-right">
 								<a href="../contracts/edit.php?id=<?=$Contract_No?>" class="hover:text-blue-500">Edit Contract</a>

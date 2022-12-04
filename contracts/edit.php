@@ -45,9 +45,9 @@ include('../templates/top-bar.php');
 							<dl class="grow">
 								
 								<dt class="font-bold text-2xl"><?=$contract['Title'] ?? '' ?></dt>
-                                <dt class="text-xl">Proposal Number:  <?=$contract['Proposal_No'] ?? '' ?></dt>
                                 <dt class="text-xl">Contract Number:  <?=$contract['Contract_No'] ?? '' ?></dt>
-								<dt class="text-xl">Client ID: <?=$contract['Client_Id'] ?? '' ?></dt>
+								<dt class="text-xl">Proposal Number:  <?=$contract['Proposal_No'] ?? '' ?></dt>
+								<dt class="text-xl">Client: <?=$contract['Company_Name'] ?? '' ?></dt>
                                 <dt class="text-xl">Start Date:  <?=$contract['Start_Date'] ?? '' ?></dt>
                                 <dt class="text-xl">
                                     Delivery Date

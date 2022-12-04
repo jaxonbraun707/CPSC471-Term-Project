@@ -62,17 +62,17 @@ function search_contracts($db, $search_term) {
  * @param  $Issued_Date, $Expiry_Date, $Client_Id 
  * 
  **********************/
-function add_contract($db, $Proposal_No, $Contract_No, $Start_Date, $Delivery_Date, $Payment_Terms, $Issued_Date, $Expiry_Date, $Client_Id) {
+function add_contract($db, $proposal, $Contract_No, $Start_Date, $Delivery_Date, $Payment_Terms, $Issued_Date, $Expiry_Date, $Client_Id) {
 	$contract_q = "
 		INSERT INTO contract (Proposal_No, Contract_No, Start_Date, Delivery_Date, Payment_Terms, Issued_Date, Expiry_Date, Client_Id)
-		VALUES (:Proposal_No, :Contract_No, :Start_Date, :Delivery_Date, :Payment_Terms, :Issued_Date, :Expiry_Date, :Client_Id)
+		VALUES (:proposal, :Contract_No, :Start_Date, :Delivery_Date, :Payment_Terms, :Issued_Date, :Expiry_Date, :Client_Id)
 	";
 
 	if ($db->beginTransaction()) {
 		try {
 			// insert contract
 			$query = $db->prepare($contract_q);
-			$query->execute([':Proposal_No' => $Proposal_No, ':Contract_No' => $Contract_No, ':Start_Date' => $Start_Date, ':Delivery_Date' => $Delivery_Date, ':Payment_Terms' => $Payment_Terms, ':Issued_Date' => $Issued_Date, ':Expiry_Date' => $Expiry_Date, ':Client_Id' => $Client_Id]);
+			$query->execute([':proposal' => $proposal, ':Contract_No' => $Contract_No, ':Start_Date' => $Start_Date, ':Delivery_Date' => $Delivery_Date, ':Payment_Terms' => $Payment_Terms, ':Issued_Date' => $Issued_Date, ':Expiry_Date' => $Expiry_Date, ':Client_Id' => $Client_Id]);
 
 	    	return $db->commit();
 	  	} catch (Exception $e) {
@@ -94,11 +94,13 @@ function add_contract($db, $Proposal_No, $Contract_No, $Start_Date, $Delivery_Da
 function find_contract($db, $contract_no) {
 	$q = "
 		SELECT  
-			C.*, P.Title
-		FROM Contract AS C, Proposal AS P
+			C.*, P.Title, CL.Company_Name
+		FROM Contract AS C, Proposal AS P, Client_Proposals AS CP, Client AS CL
 		WHERE
 			C.Contract_No = :contract_no AND
-			C.Proposal_No = P.Proposal_No
+			C.Proposal_No = P.Proposal_No AND
+			C.Proposal_No = CP.Proposal_No AND
+			CP.Client_Id = CL.Client_Id
 		";
 	$query = $db->prepare($q);
 	$query->execute([':contract_no' => $contract_no]);
