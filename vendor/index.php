@@ -45,8 +45,8 @@ include('../templates/top-bar.php');
                     <a href="create.php" class="hover:bg-blue-400 bg-blue-500 text-blue-50 py-2 px-4 rounded font-semibold">Add Vendor</a>
                 </div>
             </div>
-            <form class="m-4" method="GET" action="index.php">
-				<input class="border px-2 rounded" type="search" placeholder="Vendor_Name" name="search_term" value="<?=$search_term?>">
+            <form class="m-4 flex" method="GET" action="index.php">
+				<input class="border px-2 rounded grow" type="search" placeholder="Vendor_Name" name="search_term" value="<?=$search_term?>">
 				<button class="hover:text-blue-400 hover:border-blue-400 border px-2 text-black rounded font-semibold" type="submit">Search Vendor</button>
 			</form>
 
