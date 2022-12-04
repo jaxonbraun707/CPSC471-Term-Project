@@ -38,7 +38,7 @@ include('../templates/top-bar.php');
 			?>
 			<h1 class="text-xl font-semibold m-4">Add a Design</h1>
 
-			<form class="m-4" method="POST" action="/<?=BASE_URL?>/designs/post.php">
+			<form class="m-4" method="POST" action="<?=BASE_URL?>/designs/post.php">
 				<div class="mb-4">
 					<input type="number" name="design_no" class="border px-2 rounded" placeholder="Enter Design No.">
 				</div>
