@@ -1,4 +1,5 @@
 <?php
+
 /**********************
  * 
  * query for retrieving all contracts
@@ -144,4 +145,5 @@ function delete_contract($db, $Contract_No){
 	$query->execute([':Contract_No' => $Contract_No]);
 	return $query;
 }
+
 
