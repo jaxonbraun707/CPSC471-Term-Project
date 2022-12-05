@@ -6,7 +6,7 @@ require_once('../data/proposal.php');
 require_once('../data/employee.php');
 
 $Title = "Proposal";
-$error = NULL;
+$error = get_error_in_session();
 
 $Proposal_No = $_GET['id'] ?? '';
 $proposal = find_proposal($db, $Proposal_No);
