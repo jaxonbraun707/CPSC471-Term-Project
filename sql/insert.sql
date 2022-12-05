@@ -94,6 +94,9 @@ VALUES(
 	'Sales'
 ); 
 
+INSERT INTO Regions(`Sales_SSN`, `Sales_Region`)
+VALUES(4, 'Northern Alberta');
+
 INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
 VALUES(
 	'joetuff',
@@ -119,6 +122,9 @@ VALUES(
 	'Sales'
 ); 
 
+INSERT INTO Regions(`Sales_SSN`, `Sales_Region`)
+VALUES(5, 'Southern Alberta');
+
 INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
 VALUES(
 	'sarahsteward',
@@ -143,6 +149,9 @@ VALUES(
 	'Postal', 
 	'Sales'
 ); 
+
+INSERT INTO Regions(`Sales_SSN`, `Sales_Region`)
+VALUES(6, 'British Columbia');
 
 INSERT INTO USER (`Username`, `Password`, `User_Type`, `ESSN`)
 VALUES(

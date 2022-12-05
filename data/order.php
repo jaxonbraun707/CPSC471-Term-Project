@@ -69,7 +69,7 @@ function find_order_parts_with_average_price($db, $order_no){
 			Parts_Inventory.*, AVG(Vendors_Provides_Parts.Price) as Average_Price, Parts_Inventory.Qty * AVG(Vendors_Provides_Parts.Price) as Estimate_Subtotal 
 				FROM Orders, Part, Parts_Inventory, Vendors_Provides_Parts
 				WHERE
-					Orders.Order_No = 1 AND
+					Orders.Order_No = :order_no AND
 					Orders.Order_No = Parts_Inventory.Order_No AND
 					Parts_Inventory.Part_No = Part.Part_No AND
 					Part.Part_No = Vendors_Provides_Parts.Part_No
@@ -107,6 +107,21 @@ function get_new_order_labours($db, $order_no, $job) {
 		";
 	$query = $db->prepare($q);
 	$query->execute([':order_no' => $order_no, ':job' => $job]);
+	return $query;
+}
+
+function get_new_parts_order($db, $order_no){
+	$q = "
+		SELECT Part.*
+		FROM Part
+		WHERE
+			Part.Part_No NOT IN (
+				SELECT Part_No FROM Parts_Inventory
+				WHERE Order_No = :order_no
+			)
+		";
+	$query = $db->prepare($q);
+	$query->execute([':order_no' => $order_no]);
 	return $query;
 }
 

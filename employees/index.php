@@ -54,7 +54,7 @@ include('../templates/top-bar.php');
                 </div>
             </div>
             <form class="m-4 flex" method="GET" action="index.php">
-				<input class="border px-2 rounded grow" type="search" placeholder="Name, SSN, or Job Title" name="search_term" value="<?=$search_term?>">
+				<input class="border px-2 rounded grow" type="search" placeholder="Enter Name, SSN, or Job Title" name="search_term" value="<?=$search_term?>">
 				<button class="hover:text-blue-400 hover:border-blue-400 border px-2 text-black rounded font-semibold" type="submit">Search for Employee</button>
 			</form>
 

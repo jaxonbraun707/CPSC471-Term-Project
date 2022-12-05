@@ -1,10 +1,10 @@
 <nav class="w-64 h-screen fixed pt-20 border">
 	<ul>
 		<li class="py-2 px-4">
-			<a href="<?=BASE_URL ?>/clients/">Clients</a>
+			<a href="<?=BASE_URL ?>/clients/"class="hover:text-blue-500">Clients</a>
 		</li>
-		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/proposals/">Proposals</a></li>
-		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/contracts/">Contracts</a></li>
+		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/proposals/"class="hover:text-blue-500">Proposals</a></li>
+		<li class="py-2 px-4"><a href="<?=BASE_URL ?>/contracts/"class="hover:text-blue-500">Contracts</a></li>
 		<li class="py-2 px-4">
 			<a href="<?=BASE_URL?>/projects/" class="hover:text-blue-500">Projects</a>
 		</li>

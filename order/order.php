@@ -16,6 +16,10 @@ $new_labours = [];
 $new_labours = get_new_order_labours($db, $order_no, $_job_types['labour']);
 $new_labours = $new_labours->fetchAll(PDO::FETCH_ASSOC);
 
+$new_parts = [];
+$new_parts = get_new_parts_order($db, $order_no);
+$new_parts = $new_parts->fetchAll(PDO::FETCH_ASSOC);
+
 if(!empty($order)) {
 	$order = $order->fetch();
 }
@@ -136,7 +140,7 @@ include('../templates/top-bar.php');
 					<table class="w-2/5" style="max-height: 500px;">
 						<thead>
 							<tr>
-								<td class="mt-4 py-2 font-bold border-b" colspan="2">Parts</td>
+								<td class="mt-4 py-2 font-bold border-b" colspan="2">Parts this Order Uses</td>
 							</tr>
 						</thead>
 						<tbody>
@@ -145,12 +149,12 @@ include('../templates/top-bar.php');
 							?>
 							<tr>
 								<td class="py-2">
-									<?="Part No: ".$part['Part_No']." Qty: ".$part['Qty']?>
+									<?="Part No: ".$part['Part_No']." Quantity: ".$part['Qty']?>
 								</td>
 								<td class="text-right py-2">
 									<form method="POST" action="delete_part.php">
-										<input type="hidden" name="order_no" value="<?=$order['Order_No']?>">
 										<input type="hidden" name="part_no" value="<?=$part['Part_No']?>">
+										<input type="hidden" name="order_no" value="<?=$order['Order_No']?>">
 										<button type="submit" class="hover:text-red-500">Remove</button>
 									</form>
 								</td>
@@ -160,13 +164,31 @@ include('../templates/top-bar.php');
 							?>
 						</tbody>
 					</table>
-					<form method="POST" action="add_part.php">
-						<input type="hidden" name="order_no" value="<?=$order['Order_No']?>">
-						<label>Add a part:</label>
-						<input type="number" name="part_no" class="py-2 border rounded pl-2 w-32" placeholder="Part No.">
-						<input type="number" name="qty" class="py-2 border rounded pl-2 w-32" placeholder="Qty">
-						<button class="hover:text-blue-500 w-2/6" type="submit">Add</button>
-					</form>
+					<?php
+						if (!empty($new_parts)) {
+						?>
+						<form class="mt-8 border-t py-4 justify-between" method="POST" action="add_part.php">
+							<input type="hidden" name="order_no" value="<?=$order['Order_No']?>">
+							<div>
+								<select name="part_no" id="part_no" class="border">
+									<option selected>Add Part</option>
+									<?php
+									foreach($new_parts as $part) {
+									?>
+										<option value="<?=$part['Part_No']?>"><?=$part['Part_No']?></option>
+									<?php
+									}
+									?>
+								</select>
+							</div>
+                			<div class="m-4">
+								<input type="number" name="qty" class="border px-2 rounded" placeholder="Enter Quantity">
+							</div>
+							<button type="submit" class="hover:text-blue-500">Add</button>
+						</form>
+						<?php
+						}
+						?>
 				</section>
 			</div>
 		</main>
